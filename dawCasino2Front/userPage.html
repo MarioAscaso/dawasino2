@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Panel - DawCasino</title>
+    <link rel="stylesheet" href="assets/css/userPage.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <div class="dashboard-wrapper">
+        
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>DAW<span class="text-gold">CASINO</span></h2>
+            </div>
+            
+            <ul class="nav-links">
+                <li class="section-title">JUEGOS</li>
+                <li><a href="blackjack.html">🃏 BLACKJACK</a></li>
+                <li><a href="#" class="disabled">🎰 SLOTS (Pronto)</a></li>
+                <li><a href="#" class="disabled">🎡 ROULETTE (Pronto)</a></li>
+                <li class="section-title">CUENTA</li>
+                <li><a href="#">💰 DEPOSITAR</a></li>
+                <li><a href="#">💸 RETIRAR</a></li>
+                <li><a href="#">📝 HISTORIAL</a></li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            
+            <header class="top-bar">
+                <div class="user-controls">
+                    <div class="balance-wrapper">
+                        <span>SALDO:</span>
+                        <span class="balance-amount">1.250 €</span>
+                    </div>
+
+                    <div class="user-profile">
+                        <span class="user-name">USERNAME</span>
+                        <div class="user-image"></div>
+                    </div>
+
+                    <button class="settings-btn" title="Ajustes">⚙️</button>
+                    
+                    <a href="index.html" class="logout-btn" title="Cerrar Sesión">CERRAR SESIÓN</a>
+                </div>
+            </header>
+
+            <div class="content-container">
+                
+                <h1 class="page-title">RESUMEN DE ACTIVIDAD</h1>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Nº PARTIDAS JUGADAS</h3>
+                        <p class="stat-number">142</p>
+                    </div>
+                    <div class="stat-card win">
+                        <h3>VICTORIAS</h3>
+                        <p class="stat-number">89</p>
+                    </div>
+                    <div class="stat-card lose">
+                        <h3>DERROTAS</h3>
+                        <p class="stat-number">53</p>
+                    </div>
+                    <div class="stat-card gold">
+                        <h3>BENEFICIO NETO</h3>
+                        <p class="stat-number">+ 450 €</p>
+                    </div>
+                </div>
+
+                <div class="charts-grid">
+                    <div class="chart-card large">
+                        <h3>EVOLUCIÓN DEL SALDO</h3>
+                        <canvas id="balanceChart"></canvas>
+                    </div>
+
+                    <div class="chart-card small">
+                        <h3>RENDIMIENTO</h3>
+                        <div class="chart-wrapper">
+                            <canvas id="winLossChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-card">
+                    <h3>ÚLTIMAS JUGADAS</h3>
+                    <table class="recent-games-table">
+                        <thead>
+                            <tr>
+                                <th>JUEGO</th>
+                                <th>RESULTADO</th>
+                                <th>APUESTA</th>
+                                <th>GANANCIA</th>
+                                <th>FECHA</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>🃏 Blackjack</td>
+                                <td class="text-win">VICTORIA</td>
+                                <td>50 €</td>
+                                <td class="text-gold">+100 €</td>
+                                <td>Hace 5 min</td>
+                            </tr>
+                            <tr>
+                                <td>🃏 Blackjack</td>
+                                <td class="text-lose">DERROTA</td>
+                                <td>20 €</td>
+                                <td class="text-gray">-20 €</td>
+                                <td>Hace 12 min</td>
+                            </tr>
+                            <tr>
+                                <td>🃏 Blackjack</td>
+                                <td class="text-win">VICTORIA</td>
+                                <td>100 €</td>
+                                <td class="text-gold">+250 €</td>
+                                <td>Hace 1 hora</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Configuración común de colores
+        Chart.defaults.color = '#ccc';
+        Chart.defaults.font.family = 'Oswald';
+
+        // 1. Gráfica de Balance (Línea)
+        const ctxBalance = document.getElementById('balanceChart').getContext('2d');
+        new Chart(ctxBalance, {
+            type: 'line',
+            data: {
+                labels: ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'],
+                datasets: [{
+                    label: 'Saldo (€)',
+                    data: [500, 450, 600, 550, 800, 750, 1250],
+                    borderColor: '#ffd700',
+                    backgroundColor: 'rgba(255, 215, 0, 0.1)',
+                    borderWidth: 2,
+                    fill: true,
+                    tension: 0.4 // Curva suave
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { grid: { color: '#333' } },
+                    y: { grid: { color: '#333' } }
+                }
+            }
+        });
+
+        // 2. Gráfica de Victorias (Donut)
+        const ctxWinLoss = document.getElementById('winLossChart').getContext('2d');
+        new Chart(ctxWinLoss, {
+            type: 'doughnut',
+            data: {
+                labels: ['Victorias', 'Derrotas'],
+                datasets: [{
+                    data: [89, 53],
+                    backgroundColor: ['#2ecc71', '#ff4d4d'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { position: 'bottom' } }
+            }
+        });
+    </script>
+
+</body>
+</html>

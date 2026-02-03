@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - DawCasino</title>
+    <link rel="stylesheet" href="assets/css/register.css">
+</head>
+<body>
+    
+    <div class="authContainer">
+        <h1>CREAR CUENTA</h1>
+
+        <form id="registerForm">
+            <div class="inputGroup">
+                <label for="regUsername">USUARIO</label>
+                <input type="text" id="regUsername" placeholder="Elige un nombre de usuario" required>
+                
+                <label for="regEmail">EMAIL</label>
+                <input type="email" id="regEmail" placeholder="tu@email.com" required>
+
+                <label for="regPassword">CONTRASEÑA</label>
+                <input type="password" id="regPassword" placeholder="Mínimo 6 caracteres" required>
+
+                <label for="confirmPassword">REPETIR CONTRASEÑA</label>
+                <input type="password" id="confirmPassword" placeholder="Repite tu contraseña" required>
+
+                <button type="submit" class="btnPrimary">REGISTRARSE</button>
+            </div>
+        </form>
+
+        <div class="links">
+            <p>¿YA TIENES CUENTA? <a href="login.html">INICIA SESIÓN</a></p>
+            <p><a href="index.html">VOLVER AL LOBBY</a></p>
+        </div>
+    </div>
+
+</body>
+</html>
