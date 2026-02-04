@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600;700&display=swap');
 
-/* --- CONFIGURACIÓN BASE --- */
 * {
     margin: 0;
     padding: 0;
@@ -13,7 +12,6 @@ input, button {
 }
 
 body {
-    /* FONDO CASINO PREMIUM (Igual que en el Index) */
     background-color: #121212;
     background-image: 
         linear-gradient(135deg, rgba(18, 18, 18, 0.95) 0%, rgba(30, 30, 30, 0.90) 100%),
@@ -26,10 +24,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow-y: auto; /* Scroll permitido por si la pantalla es muy pequeña para el registro */
+    overflow-y: auto; 
 }
 
-/* --- TARJETA DE REGISTRO --- */
 .authContainer {
     background-color: #252525;
     width: 90%;
@@ -37,10 +34,9 @@ body {
     padding: 40px;
     border-radius: 8px;
     border: 1px solid #3a3a3a;
-    /* Sombra profunda para destacar del fondo */
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
     text-align: center;
-    margin: 20px 0; /* Margen de seguridad vertical */
+    margin: 20px 0;
 }
 
 h1 {
@@ -55,7 +51,6 @@ h1 {
     padding-bottom: 5px;
 }
 
-/* --- INPUTS --- */
 .inputGroup {
     display: flex;
     flex-direction: column;
@@ -90,7 +85,6 @@ input:focus {
 
 input::placeholder { color: #555; font-weight: 300; }
 
-/* --- BOTÓN --- */
 .btnPrimary {
     margin-top: 20px;
     background-color: #ffd700;
@@ -112,13 +106,11 @@ input::placeholder { color: #555; font-weight: 300; }
     box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
 }
 
-/* --- ENLACES --- */
 .links { margin-top: 25px; font-size: 0.9rem; color: #aaa; }
 .links p { margin-bottom: 8px; }
 .links a { color: #ffd700; text-decoration: none; font-weight: bold; transition: 0.3s; }
 .links a:hover { text-decoration: underline; color: #fff; }
 
-/* Responsive para pantallas bajas (crucial en Registro) */
 @media (max-height: 800px) {
     .authContainer { padding: 25px; }
     h1 { font-size: 1.6rem; margin-bottom: 15px; }

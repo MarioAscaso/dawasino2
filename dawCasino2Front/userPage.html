@@ -17,14 +17,16 @@
             </div>
             
             <ul class="nav-links">
-                <li class="section-title">JUEGOS</li>
-                <li><a href="blackjack.html">🃏 BLACKJACK</a></li>
+                <li><a href="#" class="nav-filter active" data-game="all">📊 RESUMEN GLOBAL</a></li>
+                
+                <li class="section-title">ESTADÍSTICAS POR JUEGO</li>
+                <li><a href="#" class="nav-filter" data-game="blackjack">🃏 BLACKJACK</a></li>
                 <li><a href="#" class="disabled">🎰 SLOTS (Pronto)</a></li>
                 <li><a href="#" class="disabled">🎡 ROULETTE (Pronto)</a></li>
+                
                 <li class="section-title">CUENTA</li>
                 <li><a href="#">💰 DEPOSITAR</a></li>
                 <li><a href="#">💸 RETIRAR</a></li>
-                <li><a href="#">📝 HISTORIAL</a></li>
             </ul>
         </nav>
 
@@ -34,11 +36,11 @@
                 <div class="user-controls">
                     <div class="balance-wrapper">
                         <span>SALDO:</span>
-                        <span class="balance-amount">1.250 €</span>
+                        <span class="balance-amount">-- €</span>
                     </div>
 
                     <div class="user-profile">
-                        <span class="user-name">USERNAME</span>
+                        <span class="user-name">...</span>
                         <div class="user-image"></div>
                     </div>
 
@@ -50,43 +52,45 @@
 
             <div class="content-container">
                 
-                <h1 class="page-title">RESUMEN DE ACTIVIDAD</h1>
+                <h1 class="page-title">RESUMEN GLOBAL</h1>
 
                 <div class="stats-grid">
                     <div class="stat-card">
-                        <h3>Nº PARTIDAS JUGADAS</h3>
-                        <p class="stat-number">142</p>
+                        <h3>Nº PARTIDAS</h3>
+                        <p class="stat-number" id="totalGames">0</p>
                     </div>
                     <div class="stat-card win">
                         <h3>VICTORIAS</h3>
-                        <p class="stat-number">89</p>
+                        <p class="stat-number" id="totalWins">0</p>
                     </div>
                     <div class="stat-card lose">
                         <h3>DERROTAS</h3>
-                        <p class="stat-number">53</p>
+                        <p class="stat-number" id="totalLosses">0</p>
                     </div>
                     <div class="stat-card gold">
-                        <h3>BENEFICIO NETO</h3>
-                        <p class="stat-number">+ 450 €</p>
+                        <h3>BALANCE NETO</h3>
+                        <p class="stat-number" id="netProfit">0 €</p>
                     </div>
                 </div>
 
                 <div class="charts-grid">
                     <div class="chart-card large">
-                        <h3>EVOLUCIÓN DEL SALDO</h3>
-                        <canvas id="balanceChart"></canvas>
+                        <h3 id="balanceChartTitle">EVOLUCIÓN DEL SALDO</h3>
+                        <div id="balanceChartContainer" style="position: relative; height: 200px; width: 100%;">
+                            <canvas id="balanceChart"></canvas>
+                        </div>
                     </div>
 
                     <div class="chart-card small">
                         <h3>RENDIMIENTO</h3>
-                        <div class="chart-wrapper">
+                        <div id="winLossChartContainer" class="chart-wrapper">
                             <canvas id="winLossChart"></canvas>
                         </div>
                     </div>
                 </div>
 
                 <div class="table-card">
-                    <h3>ÚLTIMAS JUGADAS</h3>
+                    <h3 id="tableTitle">ÚLTIMAS JUGADAS</h3>
                     <table class="recent-games-table">
                         <thead>
                             <tr>
@@ -97,29 +101,8 @@
                                 <th>FECHA</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>🃏 Blackjack</td>
-                                <td class="text-win">VICTORIA</td>
-                                <td>50 €</td>
-                                <td class="text-gold">+100 €</td>
-                                <td>Hace 5 min</td>
-                            </tr>
-                            <tr>
-                                <td>🃏 Blackjack</td>
-                                <td class="text-lose">DERROTA</td>
-                                <td>20 €</td>
-                                <td class="text-gray">-20 €</td>
-                                <td>Hace 12 min</td>
-                            </tr>
-                            <tr>
-                                <td>🃏 Blackjack</td>
-                                <td class="text-win">VICTORIA</td>
-                                <td>100 €</td>
-                                <td class="text-gold">+250 €</td>
-                                <td>Hace 1 hora</td>
-                            </tr>
-                        </tbody>
+                        <tbody id="gamesTableBody">
+                            </tbody>
                     </table>
                 </div>
 
@@ -127,55 +110,7 @@
         </main>
     </div>
 
-    <script>
-        // Configuración común de colores
-        Chart.defaults.color = '#ccc';
-        Chart.defaults.font.family = 'Oswald';
-
-        // 1. Gráfica de Balance (Línea)
-        const ctxBalance = document.getElementById('balanceChart').getContext('2d');
-        new Chart(ctxBalance, {
-            type: 'line',
-            data: {
-                labels: ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'],
-                datasets: [{
-                    label: 'Saldo (€)',
-                    data: [500, 450, 600, 550, 800, 750, 1250],
-                    borderColor: '#ffd700',
-                    backgroundColor: 'rgba(255, 215, 0, 0.1)',
-                    borderWidth: 2,
-                    fill: true,
-                    tension: 0.4 // Curva suave
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: { legend: { display: false } },
-                scales: {
-                    x: { grid: { color: '#333' } },
-                    y: { grid: { color: '#333' } }
-                }
-            }
-        });
-
-        // 2. Gráfica de Victorias (Donut)
-        const ctxWinLoss = document.getElementById('winLossChart').getContext('2d');
-        new Chart(ctxWinLoss, {
-            type: 'doughnut',
-            data: {
-                labels: ['Victorias', 'Derrotas'],
-                datasets: [{
-                    data: [89, 53],
-                    backgroundColor: ['#2ecc71', '#ff4d4d'],
-                    borderWidth: 0
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: { legend: { position: 'bottom' } }
-            }
-        });
-    </script>
+    <script src="assets/js/userPage.js"></script>
 
 </body>
 </html>
