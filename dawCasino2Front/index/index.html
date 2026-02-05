@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lobby - DawCasino</title>
+    <link rel="stylesheet" href="/common/common.css">
+    <link rel="stylesheet" href="/index/index.css">
+</head>
+
+<body>
+
+    <div id="guestPanel">
+        <h1 class="lobbyWelcome">BIENVENIDO A <span class="brandName">DAWCASINO</span></h1>
+        <p>REGÍSTRATE O INICIA SESIÓN PARA EMPEZAR A JUGAR</p>
+        <div class="authButtons">
+            <a href="login.html" class="btnLogin">INICIAR SESIÓN</a>
+            <a href="register.html" class="btnRegister">REGISTRARSE</a>
+        </div>
+    </div>
+
+    <h2>SELECCIÓN DE JUEGOS</h2>
+
+    <div class="gamesGrid">
+
+        <div id="cardBlackjack" class="gameCard">
+            <div class="gameIcon">🃏</div>
+            <h3 class="gameTitle">BLACKJACK</h3>
+            <span class="playNowText"><a href="blackjack.html" class="btnPlayBlackJack">JUGAR AHORA</a></span>
+        </div>
+        <div id="cardRoulette" class="gameCard gameCardDisabled">
+            <div class="gameIcon">🎡</div>
+            <h3 class="gameTitle">ROULETTE</h3>
+            <small>PRÓXIMAMENTE</small>
+        </div>
+        <div id="cardSlots" class="gameCard gameCardDisabled">
+            <div class="gameIcon">🎰</div>
+            <h3 class="gameTitle">SLOTS</h3>
+            <small>PRÓXIMAMENTE</small>
+        </div>
+
+    </div>
+
+    <script src="/common/common.js"></script>
+</body>
+</html>
