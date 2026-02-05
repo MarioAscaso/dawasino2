@@ -15,8 +15,19 @@
         <h1 class="lobbyWelcome">BIENVENIDO A <span class="brandName">DAWCASINO</span></h1>
         <p>REGÍSTRATE O INICIA SESIÓN PARA EMPEZAR A JUGAR</p>
         <div class="authButtons">
-            <a href="login.html" class="btnLogin">INICIAR SESIÓN</a>
-            <a href="register.html" class="btnRegister">REGISTRARSE</a>
+            <a href="/login/login.html" class="btnLogin">INICIAR SESIÓN</a>
+            <a href="/register/register.html" class="btnRegister">REGISTRARSE</a>
+        </div>
+    </div>
+
+    <div id="userPanel" style="display: none;">
+        <h1 class="lobbyWelcome">HOLA, <span class="brandName" id="landingUsername">JUGADOR</span></h1>
+        <div class="walletDisplay" style="margin-bottom: 20px; font-size: 1.5rem;">
+            SALDO ACTUAL: <span class="balanceAmount text-gold"><span id="landingBalance">0</span> €</span>
+        </div>
+        <div class="authButtons">
+            <a href="/userPage/userPage.html" class="btnLogin">IR A MI PANEL</a>
+            <button id="btnLogoutLanding" class="btnRegister" style="background-color: #ff4d4d; color: white; border:none; cursor:pointer;">CERRAR SESIÓN</button>
         </div>
     </div>
 
@@ -27,7 +38,7 @@
         <div id="cardBlackjack" class="gameCard">
             <div class="gameIcon">🃏</div>
             <h3 class="gameTitle">BLACKJACK</h3>
-            <span class="playNowText"><a href="blackjack.html" class="btnPlayBlackJack">JUGAR AHORA</a></span>
+            <span class="playNowText"><a href="#" id="btnPlayBJ" class="btnPlayBlackJack">JUGAR AHORA</a></span>
         </div>
         <div id="cardRoulette" class="gameCard gameCardDisabled">
             <div class="gameIcon">🎡</div>
@@ -43,5 +54,6 @@
     </div>
 
     <script src="/common/common.js"></script>
+    <script src="/index/index.js"></script>
 </body>
 </html>

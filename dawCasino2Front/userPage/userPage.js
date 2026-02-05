@@ -1,22 +1,26 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Verificar autenticación al cargar
     const user = checkAuth();
-    if (!user) return;
+    if (!user) return; // Si no hay usuario, checkAuth redirige
 
+    // Rellenar datos de cabecera
     const userNameElement = document.querySelector('.user-name');
     const balanceElement = document.querySelector('.balance-amount');
 
     if (userNameElement) userNameElement.textContent = user.username.toUpperCase();
     if (balanceElement) balanceElement.textContent = parseFloat(user.balance).toFixed(2) + ' €';
 
+    // Configurar botón de logout
     const logoutBtn = document.querySelector('.logout-btn');
     if (logoutBtn) {
         logoutBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            logout();
+            logout(); // Función de common.js
         });
     }
 
-    const fullHistory = [];
+    // Inicializar datos simulados (o vacíos hasta que tengas el backend de estadísticas)
+    const fullHistory = []; 
     updateDashboard('all', fullHistory);
     initSidebarFilters(fullHistory);
 });
@@ -26,7 +30,12 @@ function initSidebarFilters(fullHistory) {
 
     filters.forEach(link => {
         link.addEventListener('click', (e) => {
+            // Si es un enlace normal (como "Volver al Lobby"), no hacemos preventDefault
+            if (link.getAttribute('href') !== '#') return;
+
             e.preventDefault();
+            
+            // Gestión de clases activas
             filters.forEach(f => f.classList.remove('active'));
             link.classList.add('active');
 
@@ -54,8 +63,14 @@ function updateDashboard(filter, history) {
 }
 
 function updateStatsCards(data) {
-    if (!data || data.length === 0) return;
-    // Futura lógica de cálculo
+    if (!data || data.length === 0) {
+        document.getElementById('totalGames').textContent = "0";
+        document.getElementById('totalWins').textContent = "0";
+        document.getElementById('totalLosses').textContent = "0";
+        document.getElementById('netProfit').textContent = "0 €";
+        return;
+    }
+    // Aquí iría la lógica de cálculo real cuando tengas datos
 }
 
 function updateCharts(data) {
@@ -64,7 +79,7 @@ function updateCharts(data) {
         renderNoDataMessage('winLossChartContainer');
         return;
     }
-    // Futura lógica de gráficas
+    // Aquí iría la lógica de Chart.js
 }
 
 function updateTable(data) {
@@ -81,14 +96,15 @@ function updateTable(data) {
         `;
         return;
     }
-    // Futuro bucle de filas
+    // Aquí iría el bucle para crear filas <tr>
 }
 
 function renderNoDataMessage(containerId) {
     const container = document.getElementById(containerId);
     if (container) {
+        // Limpiamos canvas anteriores si existieran
         container.innerHTML = `
-            <div style="display: flex; justify-content: center; align-items: center; height: 100%; color: #666; font-size: 0.9rem;">
+            <div style="display: flex; justify-content: center; align-items: center; height: 100%; color: #666; font-size: 0.9rem; border: 1px dashed #444; border-radius: 4px;">
                 <p>SIN ACTIVIDAD REGISTRADA</p>
             </div>
         `;

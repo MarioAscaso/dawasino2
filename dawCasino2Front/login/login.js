@@ -8,12 +8,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
+            // Preparamos el objeto login (adaptaremos el backend para recibir esto o un Map)
             const credentials = {
                 username: username,
                 password: password
             };
 
             try {
+                // Nota: Asegúrate que API_BASE_URL en common.js apunte al endpoint correcto
                 const response = await fetch(`${API_BASE_URL}/login`, {
                     method: 'POST',
                     headers: {
@@ -28,7 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     localStorage.setItem('user', JSON.stringify(user));
 
                     alert("¡Login correcto! Bienvenido " + user.username);
-                    window.location.href = 'userPage.html'; 
+                    // Corrección crítica: ruta absoluta
+                    window.location.href = '/userPage/userPage.html'; 
                 } else {
                     const errorText = await response.text();
                     alert("Error: " + errorText);
