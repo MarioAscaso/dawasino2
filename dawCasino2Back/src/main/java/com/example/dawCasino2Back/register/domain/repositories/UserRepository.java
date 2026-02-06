@@ -1,5 +1,6 @@
-package com.example.dawCasino2Back.register.domain;
+package com.example.dawCasino2Back.register.domain.repositories;
 
+import com.example.dawCasino2Back.register.domain.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

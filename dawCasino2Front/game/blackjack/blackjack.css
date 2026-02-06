@@ -1,0 +1,112 @@
+body {
+    overflow: hidden;
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #121212; 
+    color: #fff;
+}
+
+.mainContainer { display: flex; height: 100vh; width: 100vw; }
+
+.sidebarHistory {
+    width: 200px;
+    background: rgba(0, 0, 0, 0.8);
+    border-right: 1px solid #333;
+    padding: 15px;
+    display: flex; flex-direction: column;
+    z-index: 10;
+}
+.sidebarHistory h3 { color: #ffd700; text-align: center; border-bottom: 1px solid #444; margin: 0 0 10px 0; padding-bottom: 5px; font-size: 0.9rem; }
+#miniHistoryList { list-style: none; padding: 0; margin: 0; overflow-y: auto; flex: 1; }
+.history-item { background: rgba(255,255,255,0.1); padding: 5px 10px; margin-bottom: 5px; border-radius: 4px; font-size: 0.8rem; display: flex; justify-content: space-between; }
+.res-win { color: #2ecc71; } .res-lose { color: #ff4d4d; } .res-draw { color: #ffd700; }
+
+.gameArea { flex: 1; display: flex; flex-direction: column; position: relative; padding: 10px; }
+
+.topBar {
+    height: 40px; display: flex; justify-content: space-between; align-items: center;
+    background: rgba(0,0,0,0.5); border-radius: 0 0 10px 10px; padding: 0 20px; margin-bottom: 10px;
+}
+.btnBack { color: #ccc; text-decoration: none; font-weight: bold; font-size: 0.9rem; }
+.balanceAmount { color: #ffd700; font-weight: bold; margin-left: 5px; }
+
+.tableSurface {
+    flex: 1; display: flex; flex-direction: column; justify-content: space-between; position: relative;
+    width: 90%; max-width: 500px; margin: 0 auto 10px auto;
+    border-radius: 50% / 40%;
+    background: #1b5e20;
+    border: 10px solid #3e2723;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    padding: 30px 20px;
+}
+
+.dealerShoe {
+    position: absolute; top: 40px; right: 30px; width: 80px; height: 110px;
+    background: #333; border: 2px solid #555; border-radius: 5px;
+    transform: rotate(-20deg);
+}
+
+.handSection { display: flex; flex-direction: column; align-items: center; min-height: 100px; }
+.scoreBadge { background: rgba(0,0,0,0.6); padding: 2px 10px; border-radius: 10px; font-size: 0.8rem; margin: 5px 0; border: 1px solid #555; }
+
+.cardsContainer { display: flex; justify-content: center; height: 100px; }
+.card {
+    width: 70px; height: 100px; background: #fff; border-radius: 5px;
+    display: flex; justify-content: center; align-items: center;
+    font-size: 1.8rem; font-weight: bold;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+    
+    margin: 0 2px; 
+    
+    position: relative;
+    
+    --startX: 0px; --startY: 0px;
+    opacity: 0;
+    animation: dealFlyIn 0.5s ease-out forwards;
+}
+
+@keyframes dealFlyIn {
+    0% { opacity: 0; transform: translate(var(--startX), var(--startY)) scale(0.5); }
+    100% { opacity: 1; transform: translate(0, 0) scale(1); }
+}
+
+.card.red { color: #e74c3c; } .card.black { color: #2c3e50; }
+.card-hidden { background: repeating-linear-gradient(45deg, #900, #900 10px, #b00 10px, #b00 20px); border: 2px solid #fff; }
+
+.centerTable { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+#gameMessage { font-size: 1.5rem; text-shadow: 0 2px 5px #000; margin-bottom: 5px; }
+.currentBetDisplay { background: rgba(0,0,0,0.5); padding: 5px 15px; border-radius: 15px; color: #ffd700; margin-top: 5px; }
+.betStack { height: 40px; display: flex; justify-content: center; align-items: center; }
+.chip-mini {
+    width: 40px; height: 40px; border-radius: 50%; border: 2px dashed #fff;
+    margin-left: -30px; display: flex; justify-content: center; align-items: center;
+    font-weight: bold; font-size: 0.8rem; box-shadow: 0 2px 4px #000;
+}
+.chip-mini:first-child { margin-left: 0; }
+
+.controlsArea {
+    background: rgba(0,0,0,0.8); border-top: 2px solid #ffd700; border-radius: 15px 15px 0 0;
+    padding: 10px; display: flex; justify-content: center; min-height: 80px; width: 95%; margin: 0 auto;
+}
+.bettingControls, .actionControls { display: flex; gap: 15px; width: 100%; justify-content: center; align-items: center; }
+.chipsRack { display: flex; gap: 10px; background: rgba(255,255,255,0.05); padding: 5px 15px; border-radius: 30px; }
+
+.chip {
+    width: 50px; height: 50px; border-radius: 50%; border: 3px dashed #fff;
+    display: flex; justify-content: center; align-items: center; font-weight: bold; cursor: pointer;
+    transition: transform 0.1s; user-select: none;
+}
+.chip:hover { transform: translateY(-5px); }
+.chip-1 { background: #2980b9; } .chip-5 { background: #c0392b; }
+.chip-25 { background: #27ae60; } .chip-100 { background: #2c3e50; color: #f1c40f; border-color: #f1c40f; }
+
+.btnAction { padding: 8px 20px; font-weight: bold; border: none; border-radius: 4px; cursor: pointer; }
+.btnGold { background: #ffd700; color: #000; }
+.btnHit { background: #27ae60; color: #fff; }
+.btnStand { background: #c0392b; color: #fff; }
+.btnSecondary { background: #444; color: #fff; }
+
+@media (max-width: 768px) {
+    .mainContainer { flex-direction: column; } .sidebarHistory { display: none; }
+    .tableSurface { width: 95%; padding: 20px 10px; }
+}

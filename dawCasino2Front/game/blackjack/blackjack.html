@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackjack Pro - DawCasino</title>
+    <link rel="stylesheet" href="/common/common.css">
+    <link rel="stylesheet" href="/blackjack/blackjack.css">
+</head>
+<body>
+
+    <div class="mainContainer">
+        
+        <aside class="sidebarHistory">
+            <h3>ÚLTIMAS MANOS</h3>
+            <ul id="miniHistoryList"></ul>
+        </aside>
+
+        <main class="gameArea">
+            <div class="topBar">
+                <a href="/index/index.html" class="btnBack">⬅ VOLVER AL LOBBY</a>
+                <div class="walletDisplay">
+                    SALDO: <span class="balanceAmount"><span id="currentBalance">0</span> €</span>
+                </div>
+            </div>
+
+            <div class="tableSurface">
+                <div id="dealerShoe" class="dealerShoe">
+                    <div class="shoe-top"></div>
+                    <div class="shoe-cards"></div>
+                </div>
+
+                <div class="handSection dealerSection">
+                    <div id="dealerCards" class="cardsContainer"></div>
+                    <div class="scoreBadge">BANCA <span id="dealerScore">0</span></div>
+                </div>
+
+                <div class="centerTable">
+                    <h1 id="gameMessage">HAZ TU APUESTA</h1>
+                    <div id="betStack" class="betStack"></div>
+                    <div id="currentBetDisplay" class="currentBetDisplay">APUESTA: 0 €</div>
+                </div>
+
+                <div class="handSection playerSection">
+                    <div class="scoreBadge">TÚ <span id="playerScore">0</span></div>
+                    <div id="playerCards" class="cardsContainer"></div>
+                </div>
+            </div>
+
+            <div class="controlsArea">
+                
+                <div id="bettingControls" class="bettingControls">
+                    <div class="chipsRack">
+                        <div class="chip chip-1" data-value="1">1</div>
+                        <div class="chip chip-5" data-value="5">5</div>
+                        <div class="chip chip-25" data-value="25">25</div>
+                        <div class="chip chip-100" data-value="100">100</div>
+                    </div>
+                    <div class="betActions">
+                        <button id="btnClearBet" class="btnAction btnSecondary" title="Borrar">🗑</button>
+                        <button id="btnRepeat" class="btnAction btnSecondary" title="Repetir última apuesta">🔁 REPETIR</button>
+                        <button id="btnDeal" class="btnAction btnGold">REPARTIR</button>
+                    </div>
+                </div>
+
+                <div id="actionControls" class="actionControls" style="display: none;">
+                    <button id="btnHit" class="btnAction btnHit">PEDIR CARTA</button>
+                    <button id="btnStand" class="btnAction btnStand">PLANTARSE</button>
+                </div>
+
+                <button id="btnRestart" class="btnAction btnRestart" style="display: none;">NUEVA PARTIDA</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="/common/common.js"></script>
+    <script src="/blackjack/blackjack.js"></script>
+</body>
+</html>

@@ -1,8 +1,8 @@
-package com.example.dawCasino2Back.register.infrastructure;
+package com.example.dawCasino2Back.register.infrastructure.controllers;
 
-import com.example.dawCasino2Back.login.application.LoginUserUseCase;
+import com.example.dawCasino2Back.login.application.services.LoginUserUseCase;
 import com.example.dawCasino2Back.register.application.RegisterUserUseCase;
-import com.example.dawCasino2Back.register.domain.User;
+import com.example.dawCasino2Back.register.domain.models.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

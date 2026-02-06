@@ -1,4 +1,4 @@
-package com.example.dawCasino2Back.register.domain;
+package com.example.dawCasino2Back.register.domain.models;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;

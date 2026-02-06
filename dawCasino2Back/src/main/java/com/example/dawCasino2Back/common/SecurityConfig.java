@@ -21,18 +21,17 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                // 1. Configuración CORS explícita
                 .cors(cors -> cors.configurationSource(request -> {
                     CorsConfiguration config = new CorsConfiguration();
-                    config.setAllowedOrigins(List.of("http://127.0.0.1:5502", "http://localhost:5502")); // Tu Frontend
+                    config.setAllowedOrigins(List.of("http://127.0.0.1:5502", "http://localhost:5502"));
                     config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
                     config.setAllowedHeaders(List.of("*"));
                     return config;
                 }))
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        // 2. Permitir las nuevas rutas de auth
-                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/api/users/**").permitAll()
+                        .requestMatchers("/api/blackjack/**").permitAll()
                         .anyRequest().authenticated()
                 );
 

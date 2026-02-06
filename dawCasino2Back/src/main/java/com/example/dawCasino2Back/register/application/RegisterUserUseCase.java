@@ -1,7 +1,7 @@
 package com.example.dawCasino2Back.register.application;
 
-import com.example.dawCasino2Back.register.domain.User;
-import com.example.dawCasino2Back.register.domain.UserRepository;
+import com.example.dawCasino2Back.register.domain.models.User;
+import com.example.dawCasino2Back.register.domain.repositories.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
