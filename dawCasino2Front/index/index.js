@@ -5,7 +5,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const guestPanel = document.getElementById('guestPanel');
     const userPanel = document.getElementById('userPanel');
     const btnPlayBJ = document.getElementById('btnPlayBJ');
+    const btnPlayRoulette = document.getElementById('btnPlayRoulette');
     const btnLogout = document.getElementById('btnLogoutLanding');
+
+    const setupGameButton = (btn, targetUrl, user) => {
+        if (!btn) return;
+
+        if (user) {
+            btn.href = targetUrl;
+            btn.style.opacity = "1";
+            btn.style.cursor = "pointer";
+        } else {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                alert("Debes iniciar sesión para jugar.");
+                window.location.href = "/login/login.html";
+            });
+        }
+    };
 
     if (user) {
         console.log("Usuario detectado:", user.username);

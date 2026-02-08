@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruleta - DawCasino</title>
+    <link rel="stylesheet" href="/common/common.css">
+    <link rel="stylesheet" href="/game/roulette/roulette.css">
+</head>
+<body>
+
+    <div class="mainContainer">
+        <div class="topBar">
+            <a href="/index/index.html" class="btnBack">⬅ VOLVER AL LOBBY</a>
+            <div class="walletDisplay">
+                SALDO: <span class="balanceAmount"><span id="currentBalance">0</span> €</span>
+            </div>
+        </div>
+
+        <div class="gameArea">
+            
+            <div class="wheelContainer">
+                <div class="wheelPointer">▼</div>
+                <div class="rouletteWheel" id="rouletteWheel">
+                    <div class="wheelInner">0</div>
+                </div>
+                <div class="resultDisplay" id="resultDisplay">?</div>
+            </div>
+
+            <div class="bettingBoard">
+                <div class="boardRow zeroRow">
+                    <div class="betSpot green" data-type="NUMBER" data-value="0">0</div>
+                </div>
+                <div class="numbersGrid" id="numbersGrid">
+                    </div>
+                <div class="outsideBets">
+                    <div class="betSpot red" data-type="COLOR" data-value="RED">ROJO (x2)</div>
+                    <div class="betSpot black" data-type="COLOR" data-value="BLACK">NEGRO (x2)</div>
+                    <div class="betSpot" data-type="PARITY" data-value="EVEN">PAR (x2)</div>
+                    <div class="betSpot" data-type="PARITY" data-value="ODD">IMPAR (x2)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="controlsArea">
+            <div class="betInfo">
+                <span id="selectedBetInfo">Selecciona una casilla</span>
+                <span class="currentBetDisplay">Apuesta: <span id="betAmountDisplay">0</span> €</span>
+            </div>
+            
+            <div class="chipsRack">
+                <div class="chip chip-1" data-value="1">1</div>
+                <div class="chip chip-5" data-value="5">5</div>
+                <div class="chip chip-25" data-value="25">25</div>
+                <div class="chip chip-100" data-value="100">100</div>
+            </div>
+
+            <button id="btnSpin" class="btnAction btnGold">GIRAR</button>
+        </div>
+    </div>
+
+    <script src="/common/common.js"></script>
+    <script src="/game/roulette/roulette.js"></script>
+</body>
+</html>
