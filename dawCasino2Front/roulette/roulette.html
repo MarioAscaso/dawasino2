@@ -3,63 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ruleta - DawCasino</title>
+    <title>Roulette Stars - DawCasino</title>
     <link rel="stylesheet" href="/common/common.css">
-    <link rel="stylesheet" href="/game/roulette/roulette.css">
+    <link rel="stylesheet" href="/roulette/roulette.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <div class="mainContainer">
-        <div class="topBar">
-            <a href="/index/index.html" class="btnBack">⬅ VOLVER AL LOBBY</a>
-            <div class="walletDisplay">
-                SALDO: <span class="balanceAmount"><span id="currentBalance">0</span> €</span>
-            </div>
-        </div>
+        
+        <aside class="sidebarHistory">
+            <h3>ÚLTIMAS TIRADAS</h3>
+            <ul id="miniHistoryList">
+                </ul>
+        </aside>
 
-        <div class="gameArea">
+        <main class="gameArea">
             
-            <div class="wheelContainer">
-                <div class="wheelPointer">▼</div>
-                <div class="rouletteWheel" id="rouletteWheel">
-                    <div class="wheelInner">0</div>
+            <div class="topBar">
+                <a href="/index/index.html" class="btnBack">⬅ LOBBY</a>
+                <div class="tableInfo">MESA VIP: 0.50€ - 5000€</div>
+                <div class="walletDisplay">
+                    SALDO: <span class="balanceAmount" id="currentBalance">...</span>
                 </div>
-                <div class="resultDisplay" id="resultDisplay">?</div>
             </div>
 
-            <div class="bettingBoard">
-                <div class="boardRow zeroRow">
-                    <div class="betSpot green" data-type="NUMBER" data-value="0">0</div>
-                </div>
-                <div class="numbersGrid" id="numbersGrid">
+            <div class="tableSurface">
+                
+                <div class="wheelSection">
+                    <div class="wheelContainer">
+                        <div class="wheelPointer">▼</div>
+                        <div class="rouletteWheel" id="rouletteWheel">
+                            </div>
+                        <div class="wheelInner">
+                            <div id="centerResult" class="centerResult">DAW</div>
+                        </div>
                     </div>
-                <div class="outsideBets">
-                    <div class="betSpot red" data-type="COLOR" data-value="RED">ROJO (x2)</div>
-                    <div class="betSpot black" data-type="COLOR" data-value="BLACK">NEGRO (x2)</div>
-                    <div class="betSpot" data-type="PARITY" data-value="EVEN">PAR (x2)</div>
-                    <div class="betSpot" data-type="PARITY" data-value="ODD">IMPAR (x2)</div>
+                </div>
+
+                <div class="boardSection">
+                    
+                    <div id="gameMessage" class="gameMessage">HAGA SUS APUESTAS</div>
+
+                    <div class="bettingTable" id="bettingTable">
+                        
+                        <div class="bet-cell zero-cell" data-type="NUMBER" data-value="0">0</div>
+
+                        <div class="bet-cell col-cell col-3" data-type="COLUMN" data-value="3">2 to 1</div>
+                        <div class="bet-cell col-cell col-2" data-type="COLUMN" data-value="2">2 to 1</div>
+                        <div class="bet-cell col-cell col-1" data-type="COLUMN" data-value="1">2 to 1</div>
+
+                        <div class="bet-cell doz-cell doz-1" data-type="DOZEN" data-value="1">1st 12</div>
+                        <div class="bet-cell doz-cell doz-2" data-type="DOZEN" data-value="2">2nd 12</div>
+                        <div class="bet-cell doz-cell doz-3" data-type="DOZEN" data-value="3">3rd 12</div>
+
+                        <div class="bet-cell simple-cell low" data-type="HALF" data-value="LOW">1-18</div>
+                        <div class="bet-cell simple-cell even" data-type="PARITY" data-value="EVEN">PAR</div>
+                        <div class="bet-cell simple-cell color-red" data-type="COLOR" data-value="RED">♦</div>
+                        <div class="bet-cell simple-cell color-black" data-type="COLOR" data-value="BLACK">♦</div>
+                        <div class="bet-cell simple-cell odd" data-type="PARITY" data-value="ODD">IMPAR</div>
+                        <div class="bet-cell simple-cell high" data-type="HALF" data-value="HIGH">19-36</div>
+
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="controlsArea">
-            <div class="betInfo">
-                <span id="selectedBetInfo">Selecciona una casilla</span>
-                <span class="currentBetDisplay">Apuesta: <span id="betAmountDisplay">0</span> €</span>
-            </div>
-            
-            <div class="chipsRack">
-                <div class="chip chip-1" data-value="1">1</div>
-                <div class="chip chip-5" data-value="5">5</div>
-                <div class="chip chip-25" data-value="25">25</div>
-                <div class="chip chip-100" data-value="100">100</div>
-            </div>
+            <div class="controlsArea">
+                <div class="bettingControls">
+                    <div class="chipsRack">
+                        <div class="chip chip-1" data-value="1">1</div>
+                        <div class="chip chip-5" data-value="5">5</div>
+                        <div class="chip chip-25" data-value="25">25</div>
+                        <div class="chip chip-100" data-value="100">100</div>
+                        <div class="chip chip-500" data-value="500">500</div>
+                    </div>
+                    
+                    <div class="betInfoDisplay">
+                        <span class="infoLabel">APUESTA TOTAL</span>
+                        <span class="infoValue" id="betAmountDisplay">0.00 €</span>
+                    </div>
 
-            <button id="btnSpin" class="btnAction btnGold">GIRAR</button>
-        </div>
+                    <div class="betActions">
+                        <button id="btnClearBet" class="btnAction btnSecondary">BORRAR</button>
+                        <button id="btnRepeat" class="btnAction btnSecondary">REPETIR</button>
+                        <button id="btnSpin" class="btnAction btnGold" disabled>GIRAR</button>
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
 
     <script src="/common/common.js"></script>
-    <script src="/game/roulette/roulette.js"></script>
+    <script src="/roulette/roulette.js"></script>
 </body>
 </html>

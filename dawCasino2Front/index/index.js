@@ -36,10 +36,18 @@ document.addEventListener('DOMContentLoaded', () => {
         if(usernameDisplay) usernameDisplay.textContent = user.username.toUpperCase();
         if(balanceDisplay) balanceDisplay.textContent = parseFloat(user.balance).toFixed(2);
 
+        // --- LÓGICA BLACKJACK ---
         if(btnPlayBJ) {
             btnPlayBJ.href = "/blackjack/blackjack.html";
             btnPlayBJ.style.opacity = "1"; 
             btnPlayBJ.style.cursor = "pointer";
+        }
+
+        // --- LÓGICA ROULETTE (NUEVO) ---
+        if(btnPlayRoulette) {
+            btnPlayRoulette.href = "/roulette/roulette.html";
+            btnPlayRoulette.style.opacity = "1"; 
+            btnPlayRoulette.style.cursor = "pointer";
         }
 
         if(btnLogout) {
@@ -54,8 +62,18 @@ document.addEventListener('DOMContentLoaded', () => {
         if(guestPanel) guestPanel.style.display = 'block';
         if(userPanel) userPanel.style.display = 'none';
 
+        // --- LÓGICA BLACKJACK ---
         if(btnPlayBJ) {
             btnPlayBJ.addEventListener('click', (e) => {
+                e.preventDefault();
+                alert("Debes iniciar sesión para jugar.");
+                window.location.href = "/login/login.html";
+            });
+        }
+
+        // --- LÓGICA ROULETTE (NUEVO) ---
+        if(btnPlayRoulette) {
+            btnPlayRoulette.addEventListener('click', (e) => {
                 e.preventDefault();
                 alert("Debes iniciar sesión para jugar.");
                 window.location.href = "/login/login.html";

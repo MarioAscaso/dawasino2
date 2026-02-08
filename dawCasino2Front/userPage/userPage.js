@@ -25,18 +25,37 @@ let winLossChartInstance = null;
 
 async function loadUserHistory(userId) {
     try {
-        const response = await fetch(`http://localhost:8989/api/blackjack/history/${userId}`);
+        // MODIFICADO: Cargar ambos historiales (Blackjack y Ruleta)
+        const [resBJ, resRoulette] = await Promise.all([
+            fetch(`http://localhost:8989/api/blackjack/history/${userId}`),
+            fetch(`http://localhost:8989/api/roulette/history/${userId}`)
+        ]);
 
-        if (response.ok) {
-            globalHistory = await response.json();
-            
-            updateDashboard('all', globalHistory);
-            initSidebarFilters(globalHistory);
+        let historyBJ = [];
+        let historyRoulette = [];
+
+        if (resBJ.ok) {
+            historyBJ = await resBJ.json();
         } else {
-            console.error("Error al cargar el historial del servidor.");
+            console.error("Error al cargar historial de Blackjack");
         }
+
+        if (resRoulette.ok) {
+            historyRoulette = await resRoulette.json();
+        } else {
+            console.error("Error al cargar historial de Ruleta");
+        }
+
+        // Combinar todos los juegos y ordenarlos por fecha (más reciente primero)
+        globalHistory = [...historyBJ, ...historyRoulette].sort((a, b) => 
+            new Date(b.playedAt) - new Date(a.playedAt)
+        );
+            
+        updateDashboard('all', globalHistory);
+        initSidebarFilters(globalHistory);
+
     } catch (error) {
-        console.error("Error de conexión:", error);
+        console.error("Error de conexión cargando historiales:", error);
     }
 }
 
@@ -66,6 +85,7 @@ function updateDashboard(filter, history) {
         filteredData = history;
         if (pageTitle) pageTitle.textContent = "RESUMEN GLOBAL";
     } else {
+        // Filtramos por gameType (BLACKJACK o ROULETTE)
         filteredData = history.filter(item => item.gameType === filter.toUpperCase());
         if (pageTitle) pageTitle.textContent = `ESTADÍSTICAS: ${filter.toUpperCase()}`;
     }
@@ -87,6 +107,7 @@ function updateStatsCards(data) {
     }
     
     const totalGames = data.length;
+    // En ruleta 'WIN' es victoria, en BJ también.
     const wins = data.filter(d => d.result === 'WIN').length;
     const losses = data.filter(d => d.result === 'LOSE').length;
 
@@ -114,21 +135,27 @@ function updateCharts(data) {
         return;
     }
 
-    if (!containerBalance.querySelector('canvas')) {
-        containerBalance.innerHTML = '<canvas id="balanceChart"></canvas>';
-    }
+    // Resetear contenedores para limpiar canvas antiguos
+    containerBalance.innerHTML = '<canvas id="balanceChart"></canvas>';
+    containerWinLoss.innerHTML = '<canvas id="winLossChart"></canvas>';
     
+    // Gráfico de Línea (Balance)
+    // Ordenamos cronológicamente (antiguo a nuevo) para la gráfica
     const chronologicalData = [...data].reverse();
     let accum = 0;
     const balanceTrend = chronologicalData.map(game => {
         accum += (game.winAmount - game.betAmount);
         return accum;
     });
+    // Labels simples
     const labels = balanceTrend.map((_, i) => `Partida ${i + 1}`);
 
     const ctxBalance = document.getElementById('balanceChart');
     if (ctxBalance) {
-        if (balanceChartInstance) balanceChartInstance.destroy();
+        if (balanceChartInstance) {
+            balanceChartInstance.destroy();
+            balanceChartInstance = null;
+        }
 
         balanceChartInstance = new Chart(ctxBalance, {
             type: 'line',
@@ -157,17 +184,17 @@ function updateCharts(data) {
         });
     }
     
-    if (!containerWinLoss.querySelector('canvas')) {
-        containerWinLoss.innerHTML = '<canvas id="winLossChart"></canvas>';
-    }
-
+    // Gráfico de Donut (Wins/Losses)
     const wins = data.filter(d => d.result === 'WIN').length;
     const losses = data.filter(d => d.result === 'LOSE').length;
-    const draws = data.filter(d => d.result === 'DRAW').length;
+    const draws = data.filter(d => d.result === 'DRAW').length; // Ruleta raramente tiene empate (salvo reglas especiales), BJ sí.
 
     const ctxWinLoss = document.getElementById('winLossChart');
     if (ctxWinLoss) {
-        if (winLossChartInstance) winLossChartInstance.destroy();
+        if (winLossChartInstance) {
+            winLossChartInstance.destroy();
+            winLossChartInstance = null;
+        }
 
         winLossChartInstance = new Chart(ctxWinLoss, {
             type: 'doughnut',
@@ -210,6 +237,7 @@ function updateTable(data) {
 
     tbody.innerHTML = ''; 
 
+    // Mostrar solo las 10 últimas del conjunto filtrado
     const latestGames = data.slice(0, 10);
 
     latestGames.forEach(game => {

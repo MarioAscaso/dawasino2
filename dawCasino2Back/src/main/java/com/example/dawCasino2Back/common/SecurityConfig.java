@@ -23,9 +23,11 @@ public class SecurityConfig {
         http
                 .cors(cors -> cors.configurationSource(request -> {
                     CorsConfiguration config = new CorsConfiguration();
-                    config.setAllowedOrigins(List.of("http://127.0.0.1:5502", "http://localhost:5502"));
+                    // CAMBIO: Permitir cualquier origen (*) para evitar el error 403 por puerto incorrecto
+                    config.setAllowedOriginPatterns(List.of("*"));
                     config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
                     config.setAllowedHeaders(List.of("*"));
+                    config.setAllowCredentials(true);
                     return config;
                 }))
                 .csrf(csrf -> csrf.disable())
@@ -33,7 +35,6 @@ public class SecurityConfig {
                         .requestMatchers("/api/users/**").permitAll()
                         .requestMatchers("/api/blackjack/**").permitAll()
                         .requestMatchers("/api/roulette/**").permitAll()
-                        .anyRequest().authenticated()
                         .anyRequest().authenticated()
                 );
 
