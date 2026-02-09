@@ -1,7 +1,9 @@
 package com.example.dawCasino2Back.games.blackjack.application;
 
-import com.example.dawCasino2Back.user.domain.models.User;
-import com.example.dawCasino2Back.user.domain.repositories.UserRepository;
+// IMPORTS ACTUALIZADOS: Añadido ".shared"
+import com.example.dawCasino2Back.user.shared.domain.models.User;
+import com.example.dawCasino2Back.user.shared.domain.repositories.UserRepository;
+
 import com.example.dawCasino2Back.games.blackjack.application.dtos.GameDTO;
 import com.example.dawCasino2Back.games.blackjack.domain.BlackjackGame;
 import com.example.dawCasino2Back.games.blackjack.domain.repositories.BlackjackGameRepository;
@@ -12,7 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class BlackjackService {
-
+    // ... (El resto del código del servicio es idéntico, solo cambiaron los imports de arriba)
     private final UserRepository userRepository;
     private final BlackjackGameRepository blackjackGameRepository;
     private final Map<Long, GameSession> activeGames = new ConcurrentHashMap<>();
@@ -35,7 +37,6 @@ public class BlackjackService {
         session.dealInitialCards();
         activeGames.put(userId, session);
 
-        // Si hay Blackjack natural, resolvemos inmediatamente
         if (session.getPlayerScore() == 21) {
             return stand(userId);
         }
@@ -60,7 +61,6 @@ public class BlackjackService {
         GameSession session = activeGames.get(userId);
         if (session == null) throw new RuntimeException("No hay partida activa");
 
-        // Turno del Dealer: Juega hasta 17
         while (session.getDealerScore() < 17) {
             session.dealerHit();
         }
@@ -100,17 +100,14 @@ public class BlackjackService {
         return mapToDTO(session, user.getBalance(), resultKey);
     }
 
-    // --- MAPEO DTO ---
     private GameDTO mapToDTO(GameSession session, double balance, String status) {
         List<String> visibleDealerCards = new ArrayList<>(session.dealerCards);
         int visibleDealerScore = session.getDealerScore();
 
-        // SI ESTAMOS JUGANDO, OCULTAMOS LA PRIMERA CARTA (HOLE CARD)
         if (status.equals("PLAYING") && visibleDealerCards.size() >= 2) {
             visibleDealerCards.set(0, "HIDDEN");
-
             List<String> visibleOnly = new ArrayList<>(session.dealerCards);
-            visibleOnly.remove(0); // Quitamos la oculta para el cálculo
+            visibleOnly.remove(0);
             visibleDealerScore = session.calculateScore(visibleOnly);
         }
 
@@ -132,7 +129,6 @@ public class BlackjackService {
         return blackjackGameRepository.findByUserIdOrderByPlayedAtDesc(userId);
     }
 
-    // --- SESIÓN DE JUEGO (Clase interna igual que antes) ---
     private static class GameSession {
         List<String> deck = new ArrayList<>();
         List<String> playerCards = new ArrayList<>();
@@ -149,9 +145,9 @@ public class BlackjackService {
 
         void dealInitialCards() {
             playerCards.add(draw());
-            dealerCards.add(draw()); // Esta será la OCULTA (Index 0)
+            dealerCards.add(draw());
             playerCards.add(draw());
-            dealerCards.add(draw()); // Esta será la VISIBLE (Index 1)
+            dealerCards.add(draw());
         }
 
         void playerHit() { playerCards.add(draw()); }

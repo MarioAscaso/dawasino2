@@ -1,17 +1,12 @@
-package com.example.dawCasino2Back.user.domain.repositories;
+package com.example.dawCasino2Back.user.shared.domain.repositories; // CAMBIO DE PAQUETE
 
-import com.example.dawCasino2Back.user.domain.models.User;
+import com.example.dawCasino2Back.user.shared.domain.models.User; // IMPORT ACTUALIZADO
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
-    User save(User user);
-
+    // Estos métodos siguen igual
     boolean existsByUsername(String username);
-
     boolean existsByEmail(String email);
-
-    Optional<User> findById(Long id);
-
     Optional<User> findByUsername(String username);
 }

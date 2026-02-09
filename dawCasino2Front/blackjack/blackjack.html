@@ -6,6 +6,7 @@
     <title>Blackjack Pro - DawCasino</title>
     <link rel="stylesheet" href="/common/common.css">
     <link rel="stylesheet" href="/blackjack/blackjack.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -13,18 +14,20 @@
         
         <aside class="sidebarHistory">
             <h3>ÚLTIMAS MANOS</h3>
-            <ul id="miniHistoryList"></ul>
+            <ul id="miniHistoryList">
+                </ul>
         </aside>
 
         <main class="gameArea">
             <div class="topBar">
-                <a href="/index/index.html" class="btnBack">⬅ VOLVER AL LOBBY</a>
+                <a href="/index/index.html" class="btnBack">⬅ LOBBY</a>
                 <div class="walletDisplay">
-                    SALDO: <span class="balanceAmount"><span id="currentBalance">0</span> €</span>
+                    SALDO: <span class="balanceAmount" id="currentBalance">...</span>
                 </div>
             </div>
 
             <div class="tableSurface">
+                
                 <div id="dealerShoe" class="dealerShoe">
                     <div class="shoe-top"></div>
                     <div class="shoe-cards"></div>
@@ -38,7 +41,7 @@
                 <div class="centerTable">
                     <h1 id="gameMessage">HAZ TU APUESTA</h1>
                     <div id="betStack" class="betStack"></div>
-                    <div id="currentBetDisplay" class="currentBetDisplay">APUESTA: 0 €</div>
+                    <div id="currentBetDisplay" class="infoText">APUESTA: 0 €</div>
                 </div>
 
                 <div class="handSection playerSection">
@@ -58,7 +61,7 @@
                     </div>
                     <div class="betActions">
                         <button id="btnClearBet" class="btnAction btnSecondary" title="Borrar">🗑</button>
-                        <button id="btnRepeat" class="btnAction btnSecondary" title="Repetir última apuesta">🔁 REPETIR</button>
+                        <button id="btnRepeat" class="btnAction btnSecondary" title="Repetir">🔁 REPETIR</button>
                         <button id="btnDeal" class="btnAction btnGold">REPARTIR</button>
                     </div>
                 </div>
@@ -68,7 +71,7 @@
                     <button id="btnStand" class="btnAction btnStand">PLANTARSE</button>
                 </div>
 
-                <button id="btnRestart" class="btnAction btnRestart" style="display: none;">NUEVA PARTIDA</button>
+                <button id="btnRestart" class="btnAction btnGold" style="display: none;">NUEVA PARTIDA</button>
             </div>
         </main>
     </div>

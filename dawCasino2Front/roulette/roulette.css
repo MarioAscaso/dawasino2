@@ -1,87 +1,33 @@
-body {
-    margin: 0; overflow: hidden;
-    font-family: 'Roboto Condensed', sans-serif;
-    background-color: #000; color: #fff;
-    user-select: none;
-}
+/* Hereda todo lo básico de common.css */
 
-.mainContainer { display: flex; height: 100vh; width: 100vw; }
-
-/* --- HISTORIAL (ESTILO BLACKJACK EXACTO) --- */
-.sidebarHistory {
-    width: 200px;
-    background: rgba(0, 0, 0, 0.9);
-    border-right: 1px solid #333;
-    padding: 15px;
-    display: flex; flex-direction: column;
-    z-index: 20;
-    flex-shrink: 0;
-}
-.sidebarHistory h3 { 
-    color: #ffd700; text-align: center; border-bottom: 1px solid #444; 
-    margin: 0 0 10px 0; padding-bottom: 5px; font-size: 0.9rem; letter-spacing: 1px;
-}
-#miniHistoryList { list-style: none; padding: 0; margin: 0; overflow-y: auto; flex: 1; }
-
-.history-item { 
-    background: rgba(255,255,255,0.08); 
-    padding: 8px 10px; margin-bottom: 5px; border-radius: 4px; 
-    font-size: 0.85rem; display: flex; justify-content: space-between; align-items: center;
-    border-left: 4px solid transparent;
-}
-/* Clases de resultado */
-.res-win { border-left-color: #2ecc71; color: #2ecc71; } 
-.res-lose { border-left-color: #ff4d4d; color: #ff4d4d; }
-.res-draw { border-left-color: #ffd700; color: #ffd700; }
-.history-val { color: #fff; font-weight: bold; font-size: 0.9rem; }
-
-
-/* --- ÁREA PRINCIPAL --- */
-.gameArea { flex: 1; display: flex; flex-direction: column; position: relative; }
-
-.topBar {
-    height: 40px; background: #111; border-bottom: 1px solid #333;
-    display: flex; justify-content: space-between; align-items: center; padding: 0 20px;
-    flex-shrink: 0;
-}
-.btnBack { text-decoration: none; color: #aaa; font-weight: bold; font-size: 0.9rem; }
-.tableInfo { color: #666; font-size: 0.8rem; letter-spacing: 1px; }
-.balanceAmount { color: #ffd700; font-weight: bold; margin-left: 5px; font-size: 1.1rem; }
-
-/* --- MESA DE JUEGO --- */
+/* --- MESA DE JUEGO ESPECÍFICA --- */
 .tableSurface {
     flex: 1; 
     display: flex; align-items: center; justify-content: space-evenly;
-    background: radial-gradient(circle at 50% 50%, #006400 0%, #002200 100%); /* Verde Tapete Intenso */
-    position: relative; overflow: hidden;
-    padding: 10px;
+    background: radial-gradient(circle at 50% 50%, #006400 0%, #002200 100%);
+    position: relative; overflow: hidden; padding: 10px;
 }
 
-/* RUEDA GIGANTE */
+/* --- RUEDA --- */
 .wheelSection {
-    /* Tamaño relativo al lado más pequeño de la pantalla */
     width: 55vmin; height: 55vmin; 
     max-width: 600px; max-height: 600px;
     min-width: 280px; min-height: 280px;
-    display: flex; justify-content: center; align-items: center;
-    position: relative;
+    display: flex; justify-content: center; align-items: center; position: relative;
     margin-right: 20px;
 }
 
 .wheelContainer {
     width: 100%; height: 100%; position: relative;
-    border-radius: 50%;
-    border: 12px solid #1a1a1a;
-    box-shadow: 0 0 40px rgba(0,0,0,0.8), inset 0 0 20px #000;
-    background: #000;
+    border-radius: 50%; border: 12px solid #1a1a1a;
+    box-shadow: 0 0 40px rgba(0,0,0,0.8), inset 0 0 20px #000; background: #000;
 }
 
 .wheelPointer {
     position: absolute; top: -20px; left: 50%; transform: translateX(-50%);
     width: 0; height: 0;
     border-left: 12px solid transparent; border-right: 12px solid transparent;
-    border-top: 25px solid #ffd700;
-    z-index: 50; filter: drop-shadow(0 2px 2px #000);
+    border-top: 25px solid var(--gold); z-index: 50;
 }
 
 .rouletteWheel {
@@ -89,68 +35,56 @@ body {
     transition: transform 4s cubic-bezier(0.15, 0.85, 0.15, 1);
 }
 
-/* Números Rueda */
 .wheelNumber {
-    position: absolute; top: 0; left: 50%;
-    /* Muy estrecho para evitar solapamientos en el centro */
-    width: 20px; height: 50%; 
-    transform-origin: bottom center;
-    display: flex; justify-content: center;
-    margin-left: -10px;
-    z-index: 5;
+    position: absolute; top: 0; left: 50%; width: 20px; height: 50%; 
+    transform-origin: bottom center; display: flex; justify-content: center;
+    margin-left: -10px; z-index: 5;
 }
 .wheelNumber span {
     display: block; margin-top: 5px;
     font-size: 16px; font-weight: bold; color: #fff;
     text-shadow: 1px 1px 2px #000;
 }
-/* Gajos */
 .wheelNumber::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 100%;
-    z-index: -1;
-    clip-path: polygon(50% 100%, 0 0, 100% 0); /* Triángulo perfecto */
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 100%; z-index: -1;
+    clip-path: polygon(50% 100%, 0 0, 100% 0);
 }
-.wheelNumber.red::before { background-color: #d32f2f; }
+.wheelNumber.red::before { background-color: var(--danger); }
 .wheelNumber.black::before { background-color: #222; }
-.wheelNumber.green::before { background-color: #2ecc71; }
+.wheelNumber.green::before { background-color: var(--success); }
 
 .wheelInner {
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
     width: 45%; height: 45%; border-radius: 50%;
     background: radial-gradient(#333, #000);
-    border: 4px solid #ffd700; z-index: 20;
+    border: 4px solid var(--gold); z-index: 20;
     display: flex; justify-content: center; align-items: center;
-    box-shadow: 0 0 20px #000;
 }
 .centerResult {
     font-size: 3rem; font-weight: bold; color: #fff;
     text-shadow: 0 0 10px rgba(255,215,0,0.8);
 }
-.centerResult.res-red { color: #ff5252; }
-.centerResult.res-green { color: #2ecc71; }
+.centerResult.res-red { color: var(--danger); }
+.centerResult.res-green { color: var(--success); }
 
-
-/* TABLERO */
+/* --- TABLERO (Grid) --- */
 .boardSection {
-    flex: 1; 
-    max-width: 800px; width: 100%;
+    flex: 1; max-width: 800px; width: 100%;
     display: flex; flex-direction: column; align-items: center;
 }
 
 .gameMessage {
-    font-size: 1.5rem; color: #ffd700; font-weight: bold; 
+    font-size: 1.5rem; color: var(--gold); font-weight: bold; 
     margin-bottom: 10px; text-shadow: 0 2px 4px rgba(0,0,0,0.8);
     min-height: 30px; text-transform: uppercase;
 }
 
 .bettingTable {
     display: grid;
-    /* 50px para el 0, resto columnas iguales, 40px para 2to1 */
     grid-template-columns: 50px repeat(12, 1fr) 40px;
-    /* Altura fija para filas de números (50px) y apuestas externas (45px) */
     grid-template-rows: repeat(3, 50px) 45px 45px;
-    gap: 3px; width: 100%;
-    user-select: none;
+    gap: 3px; width: 100%; user-select: none;
+    font-family: var(--font-game);
 }
 
 .bet-cell {
@@ -158,33 +92,22 @@ body {
     border: 1px solid rgba(255,255,255,0.3);
     color: #fff; font-weight: bold; font-size: 1.1rem;
     display: flex; justify-content: center; align-items: center;
-    cursor: pointer; position: relative;
-    transition: 0.1s;
+    cursor: pointer; position: relative; transition: 0.1s;
 }
 .bet-cell:hover { background: rgba(255,255,255,0.25); border-color: #fff; }
 
-/* Ficha visual */
 .bet-cell.active { background: rgba(255,255,255,0.15) !important; }
 .bet-cell.active::after {
-    content: ''; position: absolute;
-    width: 24px; height: 24px;
-    border-radius: 50%;
-    background: var(--chip-color, #ffd700);
-    border: 2px dashed #fff;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.8);
-    z-index: 5;
+    content: ''; position: absolute; width: 24px; height: 24px;
+    border-radius: 50%; background: var(--chip-color, gold);
+    border: 2px dashed #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.8); z-index: 5;
 }
 
-/* Colores Celdas */
-.cell-red { background-color: rgba(211, 47, 47, 0.85); } /* Rojo vivo */
-.cell-black { background-color: transparent; } 
-.zero-cell { 
-    grid-column: 1; grid-row: 1 / 4; 
-    border-radius: 50px 0 0 50px; font-size: 1.5rem;
-    border-right: none;
-}
+/* Clases específicas del tablero */
+.cell-red { background-color: rgba(211, 47, 47, 0.85); }
+.cell-black { background-color: transparent; }
+.zero-cell { grid-column: 1; grid-row: 1 / 4; border-radius: 50px 0 0 50px; font-size: 1.5rem; border-right: none; }
 
-/* Posicionamiento Grid */
 .col-cell { grid-column: 14; font-size: 0.8rem; writing-mode: vertical-rl; transform: rotate(180deg); }
 .col-3 { grid-row: 1; } .col-2 { grid-row: 2; } .col-1 { grid-row: 3; }
 
@@ -192,53 +115,15 @@ body {
 .doz-1 { grid-column: 2 / 6; } .doz-2 { grid-column: 6 / 10; } .doz-3 { grid-column: 10 / 14; }
 
 .simple-cell { grid-row: 5; font-size: 1rem; }
-.low { grid-column: 2 / 4; }
-.even { grid-column: 4 / 6; }
-.color-red { grid-column: 6 / 8; background: #d32f2f; font-size: 1.5rem; }
+.low { grid-column: 2 / 4; } .even { grid-column: 4 / 6; }
+.color-red { grid-column: 6 / 8; background: var(--danger); font-size: 1.5rem; }
 .color-black { grid-column: 8 / 10; background: #000; font-size: 1.5rem; }
-.odd { grid-column: 10 / 12; }
-.high { grid-column: 12 / 14; }
-
-
-/* CONTROLES */
-.controlsArea {
-    background: #111; border-top: 2px solid #ffd700;
-    padding: 10px 20px; z-index: 100; flex-shrink: 0;
-}
-.bettingControls { display: flex; justify-content: space-between; align-items: center; }
-
-.chipsRack { display: flex; gap: 8px; background: #222; padding: 5px 15px; border-radius: 30px; border: 1px solid #444; }
-.chip {
-    width: 42px; height: 42px; border-radius: 50%; border: 3px dashed #fff;
-    display: flex; justify-content: center; align-items: center;
-    font-weight: bold; cursor: pointer; transition: transform 0.2s;
-    box-shadow: 0 4px 5px #000; font-size: 0.85rem;
-}
-.chip:hover { transform: translateY(-5px); }
-.chip.selected { transform: translateY(-8px); box-shadow: 0 0 10px #ffd700; border-color: #ffd700; }
-
-.chip-1 { background: #0055ff; color: #fff; }
-.chip-5 { background: #d32f2f; color: #fff; }
-.chip-25 { background: #2ecc71; color: #000; }
-.chip-100 { background: #222; color: #ffd700; }
-.chip-500 { background: #9b59b6; color: #fff; }
+.odd { grid-column: 10 / 12; } .high { grid-column: 12 / 14; }
 
 .betInfoDisplay { text-align: center; }
 .infoLabel { display: block; font-size: 0.7rem; color: #888; }
-.infoValue { font-size: 1.3rem; color: #ffd700; font-weight: bold; }
+.infoValue { font-size: 1.3rem; color: var(--gold); font-weight: bold; }
 
-.betActions { display: flex; gap: 10px; }
-.btnAction { padding: 10px 20px; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; font-family: 'Roboto Condensed'; font-size: 1rem; }
-.btnGold { background: #ffd700; color: #000; }
-.btnSecondary { background: #333; color: #fff; border: 1px solid #555; }
-.btnAction:disabled { opacity: 0.5; cursor: not-allowed; }
-
-/* Responsive para portátiles */
-@media (max-height: 700px) {
-    .wheelSection { width: 45vmin; height: 45vmin; }
-    .bettingTable { grid-template-rows: repeat(3, 40px) 35px 35px; }
-    .bet-cell { font-size: 0.9rem; }
-}
 @media (max-width: 900px) {
     .sidebarHistory { display: none; }
     .tableSurface { flex-direction: column; gap: 10px; overflow-y: auto; }

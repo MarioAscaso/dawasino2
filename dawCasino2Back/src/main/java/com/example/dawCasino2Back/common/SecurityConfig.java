@@ -23,7 +23,6 @@ public class SecurityConfig {
         http
                 .cors(cors -> cors.configurationSource(request -> {
                     CorsConfiguration config = new CorsConfiguration();
-                    // CAMBIO: Permitir cualquier origen (*) para evitar el error 403 por puerto incorrecto
                     config.setAllowedOriginPatterns(List.of("*"));
                     config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
                     config.setAllowedHeaders(List.of("*"));
@@ -32,6 +31,9 @@ public class SecurityConfig {
                 }))
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
+                        // CAMBIO AQUÍ: Permitir login y register explícitamente en la ruta /api/
+                        .requestMatchers("/api/login", "/api/register").permitAll()
+                        // Mantener el resto por si acaso
                         .requestMatchers("/api/users/**").permitAll()
                         .requestMatchers("/api/blackjack/**").permitAll()
                         .requestMatchers("/api/roulette/**").permitAll()

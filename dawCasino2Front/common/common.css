@@ -1,29 +1,302 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap');
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Oswald', sans-serif;
+:root {
+    --bg-dark: #121212;
+    --bg-panel: #1a1a1a;
+    --bg-trans: rgba(0, 0, 0, 0.85);
+    --primary: #ffd700;
+    --primary-hover: #ffed4a;
+    --text-main: #fff;
+    --text-muted: #aaa;
+    --success: #2ecc71;
+    --danger: #ff4d4d; 
+    --warning: #f1c40f;
+    --font-ui: 'Oswald', sans-serif;
+    --font-game: 'Roboto Condensed', sans-serif;
+}
+
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
 }
 
 body {
-    background-color: #121212;
+    background-color: var(--bg-dark);
     background-image:
         linear-gradient(135deg, rgba(18, 18, 18, 0.95) 0%, rgba(30, 30, 30, 0.90) 100%),
         url("data:image/svg+xml,<svg id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'><defs><pattern id='a' patternUnits='userSpaceOnUse' width='40' height='20' patternTransform='scale(2) rotate(0)'><rect x='0' y='0' width='100%' height='100%' fill='%23252525ff'/><path d='M40 0L20-10V0l20 10zm0 10L20 0v10l20 10zm0 10L20 10v10l20 10zM0 20l20-10v10L0 30zm0-10L20 0v10L0 20zM0 0l20-10V0L0 10z' stroke-width='1' stroke='%23ffd700ff' fill='none'/></pattern></defs><rect width='800%' height='800%' transform='translate(0,0)' fill='url(%23a)'/></svg>");
     background-repeat: repeat;
-    color: #fff;
-    min-height: 100vh;
+    color: var(--text-main);
+    font-family: var(--font-game);
+    overflow: hidden;
+    height: 100vh; width: 100vw;
 }
 
-::-webkit-scrollbar {width: 12px;}
-::-webkit-scrollbar-track {background: #121212;}
-::-webkit-scrollbar-thumb {
-    background-color: #444;
-    border-radius: 6px;
-    border: 3px solid #121212;
+.mainContainer { 
+    display: flex; 
+    height: 100%; 
+    width: 100%; 
 }
-::-webkit-scrollbar-thumb:hover {background-color: #ffd700;}
 
-.text-gold {color: #ffd700 !important;}
+.gameArea { 
+    flex: 1; 
+    display: flex; 
+    flex-direction: column; 
+    position: relative; 
+}
+
+.topBar {
+    height: 50px; 
+    background: #111; 
+    border-bottom: 2px solid #333;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 0 20px;
+    flex-shrink: 0; 
+    z-index: 50;
+}
+
+.btnBack { 
+    text-decoration: none; 
+    color: var(--text-muted); 
+    font-weight: bold; 
+    font-size: 0.9rem; 
+    font-family: var(--font-ui); 
+}
+
+.btnBack:hover { 
+    color: var(--primary); 
+}
+
+.walletDisplay { 
+    font-size: 1.1rem; 
+    font-family: var(--font-ui); 
+}
+
+.balanceAmount { 
+    color: var(--primary); 
+    font-weight: bold; 
+    margin-left: 5px; 
+}
+
+.sidebarHistory {
+    width: 220px; 
+    background: var(--bg-trans); 
+    border-right: 1px solid #333;
+    padding: 15px; 
+    display: flex; 
+    flex-direction: column; 
+    z-index: 40; 
+    flex-shrink: 0;
+}
+
+.sidebarHistory h3 { 
+    color: var(--primary); 
+    text-align: center; 
+    border-bottom: 1px solid #444; 
+    margin: 0 0 10px 0; 
+    padding-bottom: 8px; 
+    font-size: 0.9rem; 
+    font-family: var(--font-ui); 
+    letter-spacing: 1px;
+}
+
+#miniHistoryList { 
+    list-style: none; 
+    overflow-y: auto; 
+    flex: 1; 
+    padding-right: 5px; 
+}
+
+.history-item { 
+    background: rgba(255,255,255,0.08); 
+    padding: 8px 10px; 
+    margin-bottom: 5px; 
+    border-radius: 4px; 
+    font-size: 0.85rem; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    border-left: 4px solid transparent; 
+    transition: background 0.2s;
+}
+
+.history-item:hover { 
+    background: rgba(255,255,255,0.12); 
+}
+
+.res-win { 
+    border-left-color: var(--success); 
+    color: var(--success); 
+} 
+
+.res-lose { 
+    border-left-color: var(--danger); 
+    color: var(--danger); 
+}
+
+.res-draw { 
+    border-left-color: var(--warning); 
+    color: var(--warning); 
+}
+
+.history-val { 
+    color: var(--text-main); 
+    font-weight: bold; 
+}
+
+.controlsArea {
+    background: #0f0f0f; 
+    border-top: 2px solid var(--primary);
+    padding: 10px 20px; 
+    z-index: 50; 
+    flex-shrink: 0;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    min-height: 80px;
+}
+.bettingControls { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    width: 100%; 
+    max-width: 1000px; 
+    gap: 15px; 
+}
+
+.chipsRack { 
+    display: flex; 
+    gap: 10px; 
+    background: rgba(255,255,255,0.05); 
+    padding: 8px 15px; 
+    border-radius: 30px; 
+    border: 1px solid #333; 
+}
+
+.chip {
+    width: 45px; 
+    height: 45px; 
+    border-radius: 50%; 
+    border: 3px dashed #fff;
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    font-weight: bold; 
+    cursor: pointer; 
+    transition: transform 0.2s;
+    box-shadow: 0 4px 6px #000; 
+    font-size: 0.85rem; 
+    font-family: var(--font-game);
+}
+
+.chip:hover { 
+    transform: translateY(-5px); 
+}
+
+.chip.selected { 
+    transform: translateY(-8px); 
+    box-shadow: 0 0 12px var(--primary); 
+    border-color: var(--primary); 
+}
+
+.chip-1 { 
+    background: #0055ff; 
+    color: #fff; 
+}
+
+.chip-5 { 
+    background: #d32f2f; 
+    color: #fff; 
+}
+
+.chip-25 { 
+    background: #27ae60; 
+    color: #000; 
+}
+
+.chip-100 { 
+    background: #222; 
+    color: var(--primary); 
+}
+
+.chip-500 { 
+    background: #8e44ad; 
+    color: #fff; 
+}
+
+.btnAction { 
+    padding: 10px 20px; 
+    border: none; border-radius: 4px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    font-family: var(--font-ui); 
+    font-size: 1rem; 
+    text-transform: uppercase; 
+    letter-spacing: 1px; 
+    transition: all 0.2s;
+    text-decoration: none; 
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btnAction:active { 
+    transform: scale(0.95); 
+}
+
+.btnAction:disabled { 
+    opacity: 0.5; 
+    cursor: not-allowed; 
+    filter: grayscale(1); 
+}
+
+.btnGold { 
+    background: var(--primary); 
+    color: #000;
+}
+
+.btnGold:hover:not(:disabled) { 
+    background: var(--primary-hover); 
+}
+
+.btnSecondary { 
+    background: #333; 
+    color: #fff; 
+    border: 1px solid #555; 
+}
+
+.btnSecondary:hover:not(:disabled) { 
+    background: #444; 
+    border-color: #777; 
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #444; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+.text-gold { color: var(--primary) !important; }
+
+.menu-icon {
+    width: 28px;        
+    height: 28px;
+    object-fit: contain;
+    margin-right: 12px; 
+    vertical-align: middle;
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.5));
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.nav-links a {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links a:hover .menu-icon {
+    transform: scale(1.2) rotate(-5deg); 
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.7));
+}

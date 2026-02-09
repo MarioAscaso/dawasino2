@@ -1,112 +1,173 @@
-body {
-    overflow: hidden;
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #121212; 
-    color: #fff;
+/* Heredamos variables de common.css */
+
+/* --- MESA ESPECÍFICA BLACKJACK --- */
+.tableSurface {
+    /* IMPORTANTE: Quitamos 'flex: 1' para que no se estire a tope */
+    flex: 0 0 auto; 
+    
+    display: flex; flex-direction: column; justify-content: space-between;
+    
+    /* MESA MÁS PEQUEÑA Y FLOTANDO EN EL CENTRO */
+    width: 85%; max-width: 800px; 
+    height: 60vh; /* Altura fija relativa a la pantalla (más pequeña que antes) */
+    min-height: 350px; /* Para que no se rompa en pantallas muy bajitas */
+    
+    /* ESTO ES LA CLAVE: Margen automático para centrarla vertical y horizontalmente */
+    margin: auto; 
+    
+    /* Forma ovalada */
+    border-radius: 100px / 180px; 
+    
+    /* Fondo y bordes */
+    background: radial-gradient(circle at 50% 80%, #006400 0%, #002a00 100%);
+    border: 10px solid #3e2723;
+    /* Sombra exterior fuerte para dar sensación de flotar */
+    box-shadow: 0 25px 50px rgba(0,0,0,0.8), inset 0 0 100px rgba(0,0,0,0.8);
+    
+    padding: 2vh 2vw;
+    position: relative;
+    overflow: visible; 
 }
 
-.mainContainer { display: flex; height: 100vh; width: 100vw; }
-
-.sidebarHistory {
-    width: 200px;
-    background: rgba(0, 0, 0, 0.8);
-    border-right: 1px solid #333;
-    padding: 15px;
-    display: flex; flex-direction: column;
+/* Zapato de cartas */
+.dealerShoe {
+    position: absolute; top: 12%; right: 5%; 
+    width: 70px; height: 100px;
+    background: #333; border: 3px solid #111; border-radius: 6px;
+    transform: rotate(-25deg); box-shadow: -5px 5px 15px rgba(0,0,0,0.6);
     z-index: 10;
 }
-.sidebarHistory h3 { color: #ffd700; text-align: center; border-bottom: 1px solid #444; margin: 0 0 10px 0; padding-bottom: 5px; font-size: 0.9rem; }
-#miniHistoryList { list-style: none; padding: 0; margin: 0; overflow-y: auto; flex: 1; }
-.history-item { background: rgba(255,255,255,0.1); padding: 5px 10px; margin-bottom: 5px; border-radius: 4px; font-size: 0.8rem; display: flex; justify-content: space-between; }
-.res-win { color: #2ecc71; } .res-lose { color: #ff4d4d; } .res-draw { color: #ffd700; }
-
-.gameArea { flex: 1; display: flex; flex-direction: column; position: relative; padding: 10px; }
-
-.topBar {
-    height: 40px; display: flex; justify-content: space-between; align-items: center;
-    background: rgba(0,0,0,0.5); border-radius: 0 0 10px 10px; padding: 0 20px; margin-bottom: 10px;
-}
-.btnBack { color: #ccc; text-decoration: none; font-weight: bold; font-size: 0.9rem; }
-.balanceAmount { color: #ffd700; font-weight: bold; margin-left: 5px; }
-
-.tableSurface {
-    flex: 1; display: flex; flex-direction: column; justify-content: space-between; position: relative;
-    width: 90%; max-width: 500px; margin: 0 auto 10px auto;
-    border-radius: 50% / 40%;
-    background: #1b5e20;
-    border: 10px solid #3e2723;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    padding: 30px 20px;
+.shoe-top {
+    position: absolute; top: 0; left: 0; width: 100%; height: 25%;
+    background: #444; border-bottom: 2px solid #000; border-radius: 4px 4px 0 0;
 }
 
-.dealerShoe {
-    position: absolute; top: 40px; right: 30px; width: 80px; height: 110px;
-    background: #333; border: 2px solid #555; border-radius: 5px;
-    transform: rotate(-20deg);
-}
-
-.handSection { display: flex; flex-direction: column; align-items: center; min-height: 100px; }
-.scoreBadge { background: rgba(0,0,0,0.6); padding: 2px 10px; border-radius: 10px; font-size: 0.8rem; margin: 5px 0; border: 1px solid #555; }
-
-.cardsContainer { display: flex; justify-content: center; height: 100px; }
-.card {
-    width: 70px; height: 100px; background: #fff; border-radius: 5px;
-    display: flex; justify-content: center; align-items: center;
-    font-size: 1.8rem; font-weight: bold;
-    box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
-    
-    margin: 0 2px; 
-    
+/* Áreas de Cartas */
+.handSection { 
+    display: flex; flex-direction: column; align-items: center; 
+    justify-content: center;
+    flex: 1; /* Reparte el espacio disponible dentro de la mesa */
+    z-index: 5; 
     position: relative;
+}
+
+.playerSection {
+    justify-content: flex-end; /* Empuja las cartas del jugador hacia abajo */
+    padding-bottom: 1vh;
+}
+
+.dealerSection {
+    justify-content: flex-start; /* Empuja las del dealer hacia arriba */
+    padding-top: 1vh;
+}
+
+/* Puntuación */
+.scoreBadge { 
+    background: rgba(0,0,0,0.7); padding: 4px 12px; border-radius: 15px; 
+    font-size: 0.85rem; margin-bottom: 0.5vh; border: 1px solid #777; color: #fff; 
+    font-weight: bold; font-family: var(--font-ui); z-index: 10;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+/* Contenedor de cartas */
+.cardsContainer { 
+    display: flex; justify-content: center; 
+    height: 10vh; 
+    perspective: 1000px; 
+    align-items: center;
+}
+
+/* CARTAS */
+.card {
+    width: 6vh; height: 8.5vh; /* Un pelín más pequeñas para ajustar a la nueva mesa */
+    min-width: 45px; min-height: 65px;
     
+    background: #fff; border-radius: 5px;
+    display: flex; justify-content: center; align-items: center;
+    font-size: 2.2vh; font-weight: bold;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+    margin: 0 -2vh; /* Superposición */
+    position: relative;
+    user-select: none;
+    transition: transform 0.2s;
+    
+    /* Animación */
     --startX: 0px; --startY: 0px;
     opacity: 0;
-    animation: dealFlyIn 0.5s ease-out forwards;
+    animation: dealFlyIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
+
+.card:hover { transform: translateY(-15px) !important; z-index: 50; }
 
 @keyframes dealFlyIn {
-    0% { opacity: 0; transform: translate(var(--startX), var(--startY)) scale(0.5); }
-    100% { opacity: 1; transform: translate(0, 0) scale(1); }
+    0% { opacity: 0; transform: translate(var(--startX), var(--startY)) scale(0.5) rotate(10deg); }
+    100% { opacity: 1; transform: translate(0, 0) scale(1) rotate(0deg); }
 }
 
-.card.red { color: #e74c3c; } .card.black { color: #2c3e50; }
-.card-hidden { background: repeating-linear-gradient(45deg, #900, #900 10px, #b00 10px, #b00 20px); border: 2px solid #fff; }
+.card.red { color: var(--danger); } 
+.card.black { color: #2c3e50; }
+.card-hidden { 
+    background: repeating-linear-gradient(45deg, #b71c1c, #b71c1c 10px, #c62828 10px, #c62828 20px); 
+    border: 2px solid #fff; box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+}
 
-.centerTable { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-#gameMessage { font-size: 1.5rem; text-shadow: 0 2px 5px #000; margin-bottom: 5px; }
-.currentBetDisplay { background: rgba(0,0,0,0.5); padding: 5px 15px; border-radius: 15px; color: #ffd700; margin-top: 5px; }
-.betStack { height: 40px; display: flex; justify-content: center; align-items: center; }
+/* Zona Central */
+.centerTable { 
+    display: flex; flex-direction: column; 
+    align-items: center; justify-content: center; 
+    flex: 0; /* No crece, se queda compacta en el centro */
+    margin: 1vh 0;
+}
+
+#gameMessage { 
+    font-size: 3.5vh; 
+    text-shadow: 0 2px 5px #000; margin-bottom: 0.5vh; 
+    font-family: var(--font-ui); color: var(--text-main); text-transform: uppercase;
+    min-height: 4vh;
+    white-space: nowrap;
+}
+
+.currentBetDisplay { 
+    background: rgba(0,0,0,0.6); padding: 4px 12px; border-radius: 12px; 
+    color: var(--primary); margin-top: 0.5vh; font-weight: bold; font-size: 0.85rem;
+    border: 1px solid rgba(255,215,0,0.3);
+}
+
+.betStack { 
+    height: 4vh; min-height: 35px;
+    display: flex; justify-content: center; align-items: center; position: relative; 
+}
+
+/* Fichas mini en la mesa */
 .chip-mini {
-    width: 40px; height: 40px; border-radius: 50%; border: 2px dashed #fff;
-    margin-left: -30px; display: flex; justify-content: center; align-items: center;
-    font-weight: bold; font-size: 0.8rem; box-shadow: 0 2px 4px #000;
+    width: 3.5vh; height: 3.5vh; min-width: 28px; min-height: 28px;
+    border-radius: 50%; border: 2px dashed #fff;
+    margin-left: -1.8vh; 
+    display: flex; justify-content: center; align-items: center;
+    font-weight: bold; font-size: 0.65rem; box-shadow: 0 3px 6px rgba(0,0,0,0.6);
+    color: #fff; text-shadow: 1px 1px 0 #000;
 }
 .chip-mini:first-child { margin-left: 0; }
 
-.controlsArea {
-    background: rgba(0,0,0,0.8); border-top: 2px solid #ffd700; border-radius: 15px 15px 0 0;
-    padding: 10px; display: flex; justify-content: center; min-height: 80px; width: 95%; margin: 0 auto;
+/* Botones de acción */
+.btnHit { background: var(--success); color: #fff; box-shadow: 0 4px 0 #1e8449; min-width: 100px; }
+.btnHit:hover { background: #27ae60; transform: translateY(-2px); }
+
+.btnStand { background: var(--danger); color: #fff; box-shadow: 0 4px 0 #c0392b; min-width: 100px; }
+.btnStand:hover { background: #e74c3c; transform: translateY(-2px); }
+
+.actionControls { display: flex; gap: 15px; }
+
+/* Asegurar sidebar visible en escritorio */
+@media (min-width: 900px) {
+    .sidebarHistory { display: flex !important; }
 }
-.bettingControls, .actionControls { display: flex; gap: 15px; width: 100%; justify-content: center; align-items: center; }
-.chipsRack { display: flex; gap: 10px; background: rgba(255,255,255,0.05); padding: 5px 15px; border-radius: 30px; }
 
-.chip {
-    width: 50px; height: 50px; border-radius: 50%; border: 3px dashed #fff;
-    display: flex; justify-content: center; align-items: center; font-weight: bold; cursor: pointer;
-    transition: transform 0.1s; user-select: none;
-}
-.chip:hover { transform: translateY(-5px); }
-.chip-1 { background: #2980b9; } .chip-5 { background: #c0392b; }
-.chip-25 { background: #27ae60; } .chip-100 { background: #2c3e50; color: #f1c40f; border-color: #f1c40f; }
-
-.btnAction { padding: 8px 20px; font-weight: bold; border: none; border-radius: 4px; cursor: pointer; }
-.btnGold { background: #ffd700; color: #000; }
-.btnHit { background: #27ae60; color: #fff; }
-.btnStand { background: #c0392b; color: #fff; }
-.btnSecondary { background: #444; color: #fff; }
-
+/* Ajustes Móvil */
 @media (max-width: 768px) {
-    .mainContainer { flex-direction: column; } .sidebarHistory { display: none; }
-    .tableSurface { width: 95%; padding: 20px 10px; }
+    .tableSurface { width: 95%; height: 55vh; padding: 10px; border-radius: 40px; }
+    .dealerShoe { display: none; }
+    .card { width: 45px; height: 70px; font-size: 1.1rem; margin: 0 -15px; }
+    #gameMessage { font-size: 1.4rem; }
+    .btnHit, .btnStand { min-width: auto; padding: 10px 15px; }
 }

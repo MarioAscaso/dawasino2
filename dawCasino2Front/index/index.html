@@ -11,47 +11,65 @@
 
 <body>
 
-    <div id="guestPanel">
-        <h1 class="lobbyWelcome">BIENVENIDO A <span class="brandName">DAWCASINO</span></h1>
-        <p>REGÍSTRATE O INICIA SESIÓN PARA EMPEZAR A JUGAR</p>
-        <div class="authButtons">
-            <a href="/login/login.html" class="btnLogin">INICIAR SESIÓN</a>
-            <a href="/register/register.html" class="btnRegister">REGISTRARSE</a>
-        </div>
-    </div>
-
-    <div id="userPanel" style="display: none;">
-        <h1 class="lobbyWelcome">HOLA, <span class="brandName" id="landingUsername">JUGADOR</span></h1>
-        <div class="walletDisplay" style="margin-bottom: 20px; font-size: 1.5rem;">
-            SALDO ACTUAL: <span class="balanceAmount text-gold"><span id="landingBalance">0</span> €</span>
-        </div>
-        <div class="authButtons">
-            <a href="/userPage/userPage.html" class="btnLogin">IR A MI PANEL</a>
-            <button id="btnLogoutLanding" class="btnRegister"
-                style="background-color: #ff4d4d; color: white; border:none; cursor:pointer;">CERRAR SESIÓN</button>
-        </div>
-    </div>
-
-    <h2>SELECCIÓN DE JUEGOS</h2>
-
-    <div class="gamesGrid">
-
-        <div id="cardBlackjack" class="gameCard">
-            <div class="gameIcon">🃏</div>
-            <h3 class="gameTitle">BLACKJACK</h3>
-            <span class="playNowText"><a href="#" id="btnPlayBJ" class="btnPlayBlackJack">JUGAR AHORA</a></span>
-        </div>
-        <div id="cardRoulette" class="gameCard">
-            <div class="gameIcon">🎡</div>
-            <h3 class="gameTitle">ROULETTE</h3>
-            <span class="playNowText"><a href="#" id="btnPlayRoulette" class="btnPlayBlackJack">JUGAR AHORA</a></span>
-        </div>
-        <div id="cardSlots" class="gameCard gameCardDisabled">
-            <div class="gameIcon">🎰</div>
-            <h3 class="gameTitle">SLOTS</h3>
-            <small>PRÓXIMAMENTE</small>
+    <div class="lobby-container">
+        <div id="guestPanel" class="welcome-panel">
+            <h1 class="lobbyWelcome">BIENVENIDO A <span class="brandName">DAWCASINO</span></h1>
+            <p class="subtitle">LA EXPERIENCIA DE CASINO DEFINITIVA</p>
+            <div class="authButtons">
+                <a href="/login/login.html" class="btnAction btnGold">INICIAR SESIÓN</a>
+                <a href="/register/register.html" class="btnAction btnGold">REGISTRARSE</a>
+            </div>
         </div>
 
+        <div id="userPanel" class="welcome-panel" style="display: none;">
+            <h1 class="lobbyWelcome">HOLA, <span class="brandName" id="landingUsername">JUGADOR</span></h1>
+
+            <div class="balance-display">
+                SALDO: <span class="balanceAmount" id="landingBalance">0.00 €</span>
+            </div>
+
+            <div class="authButtons">
+                <a href="/userPage/userPage.html" class="btnAction btnGold">MI PANEL</a>
+                <button id="btnLogoutLanding" class="btnAction btnGold logout-btn">SALIR</button>
+            </div>
+        </div>
+
+        <div class="games-section">
+            <div class="gamesGrid">
+
+                <div class="gameCard">
+                    <div class="card-image">
+                        <img src="/assets/icons/bj_toon.png" class="game-icon-large" alt="Blackjack">
+                    </div>
+                    <div class="card-content">
+                        <h3>BLACKJACK</h3>
+                        <a href="#" id="btnPlayBJ" class="btnAction btnGold btn-play">JUGAR</a>
+                    </div>
+                </div>
+
+                <div class="gameCard">
+                    <div class="card-image">
+                        <img src="/assets/icons/roulette_toon.png" class="game-icon-large" alt="Roulette">
+                    </div>
+                    <div class="card-content">
+                        <h3>ROULETTE</h3>
+                        <a href="#" id="btnPlayRoulette" class="btnAction btnGold btn-play">JUGAR</a>
+                    </div>
+                </div>
+
+                <div class="gameCard disabled">
+                    <div class="card-image">
+                        <img src="/assets/icons/slots_toon.png" class="game-icon-large" alt="Slots">
+                    </div>
+                    <div class="card-content">
+                        <h3>SLOTS</h3>
+                        <p>Próximamente.</p>
+                        <button class="btnAction btnSecondary" disabled>PRONTO</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
 
     <script src="/common/common.js"></script>

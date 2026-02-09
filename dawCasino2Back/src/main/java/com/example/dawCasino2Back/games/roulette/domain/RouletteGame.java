@@ -1,6 +1,7 @@
 package com.example.dawCasino2Back.games.roulette.domain;
 
-import com.example.dawCasino2Back.user.domain.models.User;
+// IMPORT ACTUALIZADO: Añadido ".shared"
+import com.example.dawCasino2Back.user.shared.domain.models.User;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
@@ -16,11 +17,11 @@ public class RouletteGame {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    private String betType; // "NUMBER", "COLOR", "PARITY"
-    private String betValue; // "17", "RED", "EVEN"
-    private Integer resultNumber; // 0-36
+    private String betType;
+    private String betValue;
+    private Integer resultNumber;
     private Double betAmount;
-    private Double winAmount; // 0.0 si pierde
+    private Double winAmount;
     private LocalDateTime playedAt;
 
     public RouletteGame() {}
@@ -35,10 +36,9 @@ public class RouletteGame {
         this.playedAt = LocalDateTime.now();
     }
 
-    // Getters para el JSON
     public Long getId() { return id; }
-    public String getGameType() { return "ROULETTE"; } // Para el filtro del frontend
-    public String getResult() { return winAmount > 0 ? "WIN" : "LOSE"; } // Compatibilidad visual
+    public String getGameType() { return "ROULETTE"; }
+    public String getResult() { return winAmount > 0 ? "WIN" : "LOSE"; }
     public Double getBetAmount() { return betAmount; }
     public Double getWinAmount() { return winAmount; }
     public Integer getResultNumber() { return resultNumber; }
