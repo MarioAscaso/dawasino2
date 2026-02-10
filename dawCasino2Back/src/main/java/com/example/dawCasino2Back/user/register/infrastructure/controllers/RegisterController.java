@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/users") // Mantenemos la ruta base para no romper el front
+@RequestMapping("/api")
 @CrossOrigin(origins = "*")
 public class RegisterController {
 

@@ -1,121 +1,160 @@
-.lobby-container {
-    height: 100%;
-    width: 100%;
+/* Hereda estilos base de common.css */
+
+/* --- CONFIGURACIÓN DE PANTALLA COMPLETA (SIN SCROLL) --- */
+body {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 2vh 20px;
+    height: 100vh; /* Altura exacta de la ventana */
+    width: 100vw;
+    overflow: hidden; /* Bloquea el scroll */
+    
+    /* Fondo con patrón */
+    background-color: #121212;
+    background-image:
+        linear-gradient(135deg, rgba(18, 18, 18, 0.95) 0%, rgba(30, 30, 30, 0.90) 100%),
+        url("data:image/svg+xml,<svg id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'><defs><pattern id='a' patternUnits='userSpaceOnUse' width='40' height='20' patternTransform='scale(2) rotate(0)'><rect x='0' y='0' width='100%' height='100%' fill='%23252525ff'/><path d='M40 0L20-10V0l20 10zm0 10L20 0v10l20 10zm0 10L20 10v10l20 10zM0 20l20-10v10L0 30zm0-10L20 0v10L0 20zM0 0l20-10V0L0 10z' stroke-width='1' stroke='%23ffd700ff' fill='none'/></pattern></defs><rect width='800%' height='800%' transform='translate(0,0)' fill='url(%23a)'/></svg>");
+    background-repeat: repeat;
 }
 
+/* --- HEADER SUPERIOR --- */
+.main-header {
+    position: relative; /* Necesario para anclar el logo absoluto */
+    height: 80px;       /* Altura fija del menú */
+    display: flex;
+    justify-content: flex-end; /* Botones a la derecha */
+    align-items: center;
+    padding: 0 40px;
+    z-index: 50;
+}
+
+/* --- LOGO GRANDE FLOTANTE --- */
+.logo-big {
+    position: absolute;
+    top: 10px;  /* Ajusta para subir/bajar */
+    left: 40px; /* Ajusta para izquierda/derecha */
+    z-index: 100; /* Siempre encima de todo */
+    display: block;
+}
+
+.logo-big img {
+    height: 140px; /* ¡TAMAÑO DEL LOGO! Aumenta si quieres más grande */
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 5px 10px rgba(0,0,0,0.6)); /* Sombra para que destaque */
+    transition: transform 0.3s ease;
+}
+
+.logo-big:hover img {
+    transform: scale(1.05); /* Efecto zoom al pasar el ratón */
+}
+
+/* Controles de Login/Register a la derecha */
+.header-right { 
+    display: flex; 
+    gap: 15px; 
+}
+
+/* --- CONTENEDOR PRINCIPAL CENTRADO --- */
+.lobby-container {
+    flex: 1; /* Ocupa todo el espacio vertical restante */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra verticalmente los juegos y título */
+    align-items: center;
+    width: 100%;
+    padding-bottom: 40px; /* Espacio para no chocar con el footer */
+}
+
+/* --- TEXTOS DE BIENVENIDA --- */
 .welcome-panel {
     text-align: center;
-    margin-bottom: 1vh; 
+    margin-bottom: 3vh; /* Espacio dinámico debajo del título */
     animation: fadeIn 0.8s ease-out;
-    flex-shrink: 0;
 }
 
 .lobbyWelcome {
-    margin-top: 5vh;
-    font-size: 6vh; 
-    font-weight: 300; 
+    font-size: 5vh; /* Tamaño relativo a la altura de la pantalla */
     margin-bottom: 0;
-    font-family: var(--font-ui); 
+    font-family: var(--font-ui);
     text-transform: uppercase;
     line-height: 1.1;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 
 .brandName { color: var(--primary); font-weight: 700; }
 
 .subtitle {
-    font-size: 2vh; 
-    color: var(--text-muted); 
-    margin-top: 1vh; 
-    margin-bottom: 2vh; 
+    font-size: 2vh;
+    color: var(--text-muted);
     letter-spacing: 2px;
+    margin-top: 1vh;
 }
 
 .balance-display {
-    font-size: 2.5vh; 
+    font-size: 2.5vh;
     background: rgba(255,255,255,0.05);
-    padding: 1vh 2vw; 
-    border-radius: 50px; 
+    padding: 1vh 2vw;
+    border-radius: 50px;
     border: 1px solid #333;
-    display: inline-block; 
-    margin-top: 1vh;
-    margin-bottom: 2vh; 
+    display: inline-block;
+    margin: 1vh 0 2vh 0;
     font-family: var(--font-ui);
 }
 
-.authButtons {
-    display: flex; 
-    justify-content: center; 
-    gap: 20px;
-}
-
-.logout-btn:hover {
-    background-color: var(--danger) !important;
-    border-color: var(--danger) !important;
-    box-shadow: none !important;
-}
-
-.games-section { 
-    width: 100%; 
-    max-width: 1200px; 
-    text-align: center;
-    flex: 1; 
-    display: flex;
-    flex-direction: column;
-    justify-content: center; 
-    padding-top: 0;
-}
+/* --- GRID DE JUEGOS --- */
+.games-section { width: 100%; display: flex; justify-content: center; }
 
 .gamesGrid {
-    display: flex; 
-    justify-content: center; 
-    gap: 2vw; 
-    flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    gap: 2vw; /* Separación horizontal flexible */
     align-items: center;
+    width: 100%;
+    max-width: 1400px;
 }
 
+/* --- TARJETAS DE JUEGO (Responsive sin scroll) --- */
 .gameCard {
     background: var(--bg-panel);
+    /* Tamaño relativo para asegurar que caben 3 */
     width: 25vw; 
     min-width: 260px; 
-    max-width: 320px;
-    height: 45vh; 
-    min-height: 300px;
+    max-width: 350px;
     
-    border: 1px solid #333; 
+    height: 45vh; /* Altura flexible: casi la mitad de la pantalla */
+    min-height: 300px; 
+    max-height: 500px;
+    
+    border: 1px solid #333;
     border-radius: 12px;
-    display: flex; 
-    flex-direction: column; 
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
     transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
     position: relative;
 }
 
 .gameCard:hover:not(.disabled) {
-    transform: translateY(-5px);
+    transform: translateY(-10px);
     border-color: var(--primary);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+    z-index: 10;
 }
 
 .card-image {
     height: 60%; 
     background: radial-gradient(circle at center, #2a2a2a, #151515);
-    display: flex; 
-    justify-content: center; 
-    align-items: center;
+    display: flex; justify-content: center; align-items: center;
     border-bottom: 1px solid #333;
     overflow: hidden;
 }
 
+/* Imágenes dentro de las tarjetas */
 .game-icon-large {
-    width: 70%;   
-    height: 70%;
+    width: 75%;   
+    height: 75%;
     object-fit: contain;
-    filter: drop-shadow(0 5px 5px rgba(0,0,0,0.5));
+    filter: drop-shadow(0 8px 8px rgba(0,0,0,0.5));
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
@@ -126,40 +165,49 @@
 .card-content {
     flex: 1; 
     padding: 1.5vh 20px; 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: space-between;
+    display: flex; flex-direction: column; 
+    align-items: center; justify-content: space-evenly;
 }
 
 .card-content h3 {
-    font-size: 2.2vh; 
+    font-size: 2.5vh; 
     color: var(--primary); 
-    margin-bottom: 0.5vh;
     font-family: var(--font-ui); 
     letter-spacing: 1px;
+    margin: 0;
 }
 
-.card-content p { 
-    color: var(--text-muted); 
-    font-size: 1.6vh; 
-    margin-bottom: 1vh; 
+.btn-play { 
+    width: 80%; 
+    font-size: 1.8vh; 
+    padding: 1vh 0; 
 }
 
-.btn-play { width: 100%; font-size: 1.8vh; }
-
+/* Estado Deshabilitado */
 .gameCard.disabled { opacity: 0.6; filter: grayscale(1); cursor: not-allowed; }
-.gameCard.disabled .game-icon-large { filter: grayscale(1); }
 
+/* --- FOOTER PEQUEÑO FIJO --- */
+footer {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    color: #555;
+    font-size: 0.8rem;
+    pointer-events: none;
+}
+
+/* Animaciones */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* Ajuste móvil */
 @media (max-width: 768px) {
-    .lobbyWelcome { font-size: 3.5rem; margin-top: 2vh; } 
-    .subtitle { font-size: 1rem; }
-    .gameCard { height: auto; min-height: 280px; width: 90%; max-width: 350px; margin-bottom: 20px; }
-    .lobby-container { display: block; overflow-y: auto; height: auto; padding-top: 40px; }
-    .games-section { display: block; margin-top: 30px; }
+    body { overflow-y: auto; height: auto; } /* Permitir scroll en móvil */
+    .lobby-container { padding-top: 100px; height: auto; }
+    .gamesGrid { flex-wrap: wrap; margin-bottom: 40px; }
+    .gameCard { width: 90%; height: 350px; margin-bottom: 20px; }
+    .logo-big img { height: 80px; } /* Logo más pequeño en móvil */
 }

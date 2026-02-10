@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/users") // Mantenemos la ruta base
+@RequestMapping("/api")
 @CrossOrigin(origins = "*")
 public class LoginController {
 
