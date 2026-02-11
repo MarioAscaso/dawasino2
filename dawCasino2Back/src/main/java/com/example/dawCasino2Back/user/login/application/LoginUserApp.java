@@ -1,7 +1,7 @@
 package com.example.dawCasino2Back.user.login.application;
 
 import com.example.dawCasino2Back.user.login.application.dtos.LoginRequest;
-import com.example.dawCasino2Back.user.shared.domain.models.User;
+import com.example.dawCasino2Back.user.shared.domain.entities.User;
 import com.example.dawCasino2Back.user.shared.domain.repositories.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

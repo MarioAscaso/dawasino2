@@ -2,7 +2,7 @@ package com.example.dawCasino2Back.user.register.infrastructure.controllers;
 
 import com.example.dawCasino2Back.user.register.application.RegisterUserApp;
 import com.example.dawCasino2Back.user.register.application.dtos.RegisterRequest;
-import com.example.dawCasino2Back.user.shared.domain.models.User;
+import com.example.dawCasino2Back.user.shared.domain.entities.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,12 +18,14 @@ public class RegisterController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody RegisterRequest request) {
+    public boolean registerUser(@RequestBody RegisterRequest request) {
         try {
-            User registeredUser = registerUserApp.execute(request);
-            return ResponseEntity.ok(registeredUser);
+            registerUserApp.execute(request);
+            //User registeredUser = registerUserApp.execute(request);
+            return true; //return ResponseEntity.ok(registeredUser);
         } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            //return ResponseEntity.badRequest().body(e.getMessage());
+            return false;
         }
     }
 }

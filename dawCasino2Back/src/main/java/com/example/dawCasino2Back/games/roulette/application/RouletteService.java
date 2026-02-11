@@ -3,7 +3,7 @@ package com.example.dawCasino2Back.games.roulette.application;
 import com.example.dawCasino2Back.games.roulette.domain.RouletteGame;
 import com.example.dawCasino2Back.games.roulette.domain.repositories.RouletteGameRepository;
 // IMPORTS ACTUALIZADOS: Añadido ".shared"
-import com.example.dawCasino2Back.user.shared.domain.models.User;
+import com.example.dawCasino2Back.user.shared.domain.entities.User;
 import com.example.dawCasino2Back.user.shared.domain.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 

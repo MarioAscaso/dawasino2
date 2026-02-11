@@ -16,13 +16,20 @@
             <img src="/assets/icons/logo.png" alt="Casino Ascaso Logo">
         </a>
 
-        <div class="header-left">
-
-        </div>
-
-        <div class="header-right authButtons">
+        <div id="guestButtons" class="header-right authButtons">
             <a href="/login/login.html" class="btnAction btnSecondary btn-login">Login</a>
             <a href="/register/register.html" class="btnAction btnGold btn-register">Register</a>
+        </div>
+
+        <div id="loggedInControls" class="header-right" style="display: none; align-items: center; gap: 20px;">
+            <div class="walletDisplay">
+                SALDO: <span class="balanceAmount" id="headerBalance">0.00 €</span>
+            </div>
+            <div class="user-profile" style="display: flex; align-items: center; gap: 10px;">
+                <span class="user-name" id="headerUsername" style="color: var(--primary); font-weight: bold;"></span>
+                <div class="user-image" style="width: 35px; height: 35px; background: #333; border-radius: 50%; border: 2px solid var(--primary);"></div>
+            </div>
+            <button id="btnLogoutHeader" class="btnAction btnSecondary" style="padding: 5px 15px; font-size: 0.8rem;">SALIR</button>
         </div>
     </header>
 
@@ -47,7 +54,6 @@
 
         <div class="games-section">
             <div class="gamesGrid">
-
                 <div class="gameCard">
                     <div class="card-image">
                         <img src="/assets/icons/bj_toon.png" class="game-icon-large" alt="Blackjack">
@@ -78,7 +84,6 @@
                         <button class="btnAction btnSecondary" disabled>PRONTO</button>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

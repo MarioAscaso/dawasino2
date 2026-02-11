@@ -1,7 +1,7 @@
 package com.example.dawCasino2Back.games.roulette.domain;
 
 // IMPORT ACTUALIZADO: Añadido ".shared"
-import com.example.dawCasino2Back.user.shared.domain.models.User;
+import com.example.dawCasino2Back.user.shared.domain.entities.User;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 

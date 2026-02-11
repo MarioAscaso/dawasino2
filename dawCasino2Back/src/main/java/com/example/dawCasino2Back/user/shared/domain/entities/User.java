@@ -1,4 +1,4 @@
-package com.example.dawCasino2Back.user.shared.domain.models;
+package com.example.dawCasino2Back.user.shared.domain.entities;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
@@ -19,8 +19,12 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @Column(columnDefinition = "double default '1000.0'")
     private Double balance;
+
+    @Column(columnDefinition = "varchar(255) default 'user'")
     private String role;
+
     private LocalDateTime createdAt;
     private String avatar;
 

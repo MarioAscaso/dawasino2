@@ -1,7 +1,7 @@
 package com.example.dawCasino2Back.games.blackjack.application;
 
 // IMPORTS ACTUALIZADOS: Añadido ".shared"
-import com.example.dawCasino2Back.user.shared.domain.models.User;
+import com.example.dawCasino2Back.user.shared.domain.entities.User;
 import com.example.dawCasino2Back.user.shared.domain.repositories.UserRepository;
 
 import com.example.dawCasino2Back.games.blackjack.application.dtos.GameDTO;

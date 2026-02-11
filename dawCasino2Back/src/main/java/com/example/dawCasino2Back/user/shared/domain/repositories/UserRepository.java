@@ -1,6 +1,6 @@
 package com.example.dawCasino2Back.user.shared.domain.repositories; // CAMBIO DE PAQUETE
 
-import com.example.dawCasino2Back.user.shared.domain.models.User; // IMPORT ACTUALIZADO
+import com.example.dawCasino2Back.user.shared.domain.entities.User; // IMPORT ACTUALIZADO
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
