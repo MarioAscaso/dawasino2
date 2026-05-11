@@ -1,6 +1,5 @@
 package com.example.dawCasino2Back.games.blackjack.application;
 
-// IMPORTS ACTUALIZADOS: Añadido ".shared"
 import com.example.dawCasino2Back.user.shared.domain.entities.User;
 import com.example.dawCasino2Back.user.shared.domain.repositories.UserRepository;
 
@@ -14,7 +13,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class BlackjackService {
-    // ... (El resto del código del servicio es idéntico, solo cambiaron los imports de arriba)
     private final UserRepository userRepository;
     private final BlackjackGameRepository blackjackGameRepository;
     private final Map<Long, GameSession> activeGames = new ConcurrentHashMap<>();

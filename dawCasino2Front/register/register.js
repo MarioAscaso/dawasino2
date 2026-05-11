@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (response.ok) {
                     alert("¡Registro exitoso! Redirigiendo al login...");
-                    window.location.href = 'login.html';
+                    window.location.href = '/login/login.html';
                 } else {
                     const errorText = await response.text();
                     alert("Error en el registro: " + errorText);

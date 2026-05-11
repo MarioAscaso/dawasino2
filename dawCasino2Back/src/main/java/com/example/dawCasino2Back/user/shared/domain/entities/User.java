@@ -1,6 +1,8 @@
 package com.example.dawCasino2Back.user.shared.domain.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.ColumnDefault;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -19,10 +21,8 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @Column(columnDefinition = "double default '1000.0'")
     private Double balance;
 
-    @Column(columnDefinition = "varchar(255) default 'user'")
     private String role;
 
     private LocalDateTime createdAt;
@@ -46,4 +46,24 @@ public class User {
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
     public String getAvatar() { return avatar; }
     public void setAvatar(String avatar) { this.avatar = avatar; }
+
+    @PrePersist
+    public void prePersist(){
+        if(balance == null){
+            balance = 1000.0;
+        }
+
+        if(role == null){
+            role = "USER";
+        }
+
+        if(avatar == null){
+            avatar = "default_avatar.png";
+        }
+
+        if(createdAt == null){
+            createdAt = LocalDateTime.now();
+        }
+    }
+
 }

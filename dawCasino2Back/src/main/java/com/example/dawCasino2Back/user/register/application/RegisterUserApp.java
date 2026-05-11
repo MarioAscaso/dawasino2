@@ -30,8 +30,6 @@ public class RegisterUserApp {
             user.setUsername(request.username());
             user.setEmail(request.email());
             user.setPassword(passwordEncoder.encode(request.password()));
-            user.setRole("USER");
-            user.setCreatedAt(java.time.LocalDateTime.now());
 
             userRepository.save(user);
         }catch (Exception e){
