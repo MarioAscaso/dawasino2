@@ -1,16 +1,24 @@
-input, button {
-    font-family: 'Oswald', sans-serif;
-}
-
-body {
+ body {
     display: flex;
     justify-content: center;
-    align-items: center; 
+    align-items: center;
+    min-height: 100vh; /* Obligatorio para centrar verticalmente */
+    margin: 0;
+    background-color: #121212;
 }
 
-.authContainer {
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.auth-box {
     background-color: #252525;
-    width: 90%;
+    width: 100%;
     max-width: 400px;
     padding: 40px;
     border-radius: 8px;
@@ -19,34 +27,38 @@ body {
     text-align: center;
 }
 
-h1 {
+.logo-small img {
+    width: 120px;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.logo-small img:hover {
+    transform: scale(1.05);
+}
+
+.auth-box h2 {
     color: #ffd700;
     margin-bottom: 25px;
-    font-weight: 400;
+    font-weight: bold;
     letter-spacing: 2px;
     text-transform: uppercase;
-    font-size: 2rem;
+    font-size: 1.6rem;
     border-bottom: 2px solid #ffd700;
     display: inline-block;
     padding-bottom: 5px;
+    font-family: var(--font-ui), 'Oswald', sans-serif;
 }
 
-.inputGroup {
+.input-group {
     display: flex;
     flex-direction: column;
     text-align: left;
-    gap: 15px;
+    margin-bottom: 15px;
+    width: 100%;
 }
 
-label {
-    color: #ccc;
-    font-size: 0.9rem;
-    letter-spacing: 1px;
-    margin-bottom: -10px;
-    margin-left: 2px;
-}
-
-input {
+.input-group input {
     background-color: #1a1a1a;
     border: 1px solid #444;
     color: #fff;
@@ -56,45 +68,56 @@ input {
     outline: none;
     transition: 0.3s;
     letter-spacing: 1px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: var(--font-game), sans-serif;
 }
 
-input:focus {
+.input-group input:focus {
     border-color: #ffd700;
     box-shadow: 0 0 8px rgba(255, 215, 0, 0.2);
 }
 
-input::placeholder { color: #555; font-weight: 300; }
+.input-group input::placeholder { 
+    color: #555; 
+    font-weight: 300; 
+}
 
-.btnPrimary {
-    margin-top: 20px;
-    background-color: #ffd700;
-    color: #121212;
-    border: none;
+/* El botón del ojito de la contraseña */
+.btn-toggle-view:hover {
+    color: #ffd700 !important;
+    transform: translateY(-50%) scale(1.1) !important;
+}
+
+.btn-full {
+    width: 100%;
+    margin-top: 15px;
     padding: 12px;
     font-size: 1.1rem;
-    font-weight: bold;
-    border-radius: 4px;
-    cursor: pointer;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: transform 0.2s, background-color 0.3s;
 }
 
-.btnPrimary:hover {
-    background-color: #ffed4a;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+.auth-switch { 
+    margin-top: 25px; 
+    font-size: 0.95rem; 
+    color: #aaa; 
 }
 
-.links { margin-top: 25px; font-size: 0.9rem; color: #aaa; }
-.links p { margin-bottom: 8px; }
-.links a { color: #ffd700; text-decoration: none; font-weight: bold; transition: 0.3s; }
-.links a:hover { text-decoration: underline; color: #fff; }
+.auth-switch a { 
+    color: #ffd700; 
+    text-decoration: none; 
+    font-weight: bold; 
+    transition: 0.3s; 
+}
+
+.auth-switch a:hover { 
+    text-decoration: underline; 
+    color: #fff; 
+}
 
 @media (max-height: 750px) {
-    .authContainer { padding: 20px; }
-    h1 { font-size: 1.5rem; margin-bottom: 15px; }
-    .inputGroup { gap: 10px; }
-    input { padding: 8px 12px; }
-    .btnPrimary { margin-top: 10px; padding: 10px; }
+    .auth-box { padding: 25px 20px; }
+    .auth-box h2 { font-size: 1.4rem; margin-bottom: 15px; }
+    .input-group { margin-bottom: 12px; }
+    .input-group input { padding: 10px 12px; }
+    .btn-full { margin-top: 10px; padding: 10px; }
 }

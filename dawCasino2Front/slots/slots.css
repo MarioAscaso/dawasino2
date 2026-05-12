@@ -1,4 +1,6 @@
-.gameArea { overflow-y: auto; }
+.gameArea { 
+    overflow-y: auto; 
+}
 
 .tableSurface { 
     flex: unset; 
@@ -7,47 +9,47 @@
     flex-direction: column; 
     align-items: center; 
     justify-content: flex-start; 
-    padding-top: 30px;
+    padding-top: 15px; /* Reducido para subir un poco la tabla */
     padding-bottom: 30px;
     background: radial-gradient(#2c3e50, #000); 
 }
 
-/* TABLA DE PREMIOS MÁS CURRADA */
+/* TABLA DE PREMIOS MÁS PEQUEÑA Y DISCRETA */
 .paytable-container {
     background: rgba(0, 0, 0, 0.85); 
     border: 2px solid var(--primary);
     border-radius: 12px; 
-    padding: 15px 25px; 
-    margin-bottom: 30px;
+    padding: 10px 20px; /* Reducido el relleno */
+    margin-bottom: 15px; /* Reducido el margen inferior */
     text-align: center; 
-    box-shadow: 0 8px 20px rgba(0,0,0,0.8), inset 0 0 15px rgba(255,215,0,0.1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.8), inset 0 0 10px rgba(255,215,0,0.1);
     display: inline-block;
 }
 .paytable-header { 
     color: var(--primary); 
-    margin-bottom: 12px; 
+    margin-bottom: 8px; 
     font-family: var(--font-ui); 
-    letter-spacing: 2px; 
-    font-size: 1.2rem;
+    letter-spacing: 1px; 
+    font-size: 1rem; /* Letra más pequeña */
     border-bottom: 1px dashed rgba(255,215,0,0.4);
     padding-bottom: 5px;
 }
 .paytable-grid { 
     display: grid; 
     grid-template-columns: 1fr 1fr; 
-    gap: 10px 40px; 
+    gap: 6px 30px; /* Huecos reducidos */
 }
 .pay-item { 
     display: flex; 
     justify-content: space-between; 
-    font-size: 1.05rem; 
+    font-size: 0.85rem; /* Fuente más pequeña */
     color: #eee; 
-    width: 220px; 
+    width: 190px; /* Más estrecho */
     border-bottom: 1px solid rgba(255,255,255,0.1); 
-    padding-bottom: 5px;
+    padding-bottom: 4px;
     align-items: center;
 }
-.symbols { font-size: 1.2rem; }
+.symbols { font-size: 1rem; }
 
 /* Colores dinámicos por premio */
 .pay-item.gold-prize .pay-mult { color: #ffd700; text-shadow: 0 0 5px rgba(255,215,0,0.5); }
@@ -55,16 +57,61 @@
 .pay-item.cherry-prize .pay-mult { color: #ff4d4d; }
 .pay-item.basic-prize .pay-mult { color: #2ecc71; }
 
-.pay-mult { font-weight: bold; font-family: var(--font-ui); font-size: 1.1rem; }
-.pay-mult small { font-size: 0.65rem; vertical-align: middle; margin-left: 6px; opacity: 0.8; letter-spacing: 1px;}
+.pay-mult { font-weight: bold; font-family: var(--font-ui); font-size: 0.95rem; }
+.pay-mult small { font-size: 0.6rem; vertical-align: middle; margin-left: 6px; opacity: 0.8; letter-spacing: 1px;}
 
-#gameMessage { font-size: 3rem; color: var(--primary); text-transform: uppercase; margin-bottom: 30px; text-shadow: 0 4px 6px #000; }
-.slot-machine { background: #b8860b; padding: 20px; border-radius: 15px; border: 5px solid #8b6508; box-shadow: 0 10px 30px #000; display: flex; justify-content: center; align-items: center;}
-.reels-container { display: flex; gap: 15px; background: #fff; padding: 20px; border-radius: 10px; border: inset 10px #444; }
-.reel { width: 100px; height: 120px; display: flex; justify-content: center; align-items: center; font-size: 5rem; background: #f1f2f6; border: 2px solid #ccc; border-radius: 5px; box-shadow: inset 0 10px 15px rgba(0,0,0,0.2); }
+/* TÍTULO MÁS PEQUEÑO Y CON MENOS MARGEN */
+#gameMessage { 
+    font-size: 2.2rem; /* Antes 3rem */
+    color: var(--primary); 
+    text-transform: uppercase; 
+    margin-bottom: 20px; /* Antes 30px */
+    text-shadow: 0 4px 6px #000; 
+}
+
+.slot-machine { 
+    background: #b8860b; 
+    padding: 15px; /* Reducido */
+    border-radius: 15px; 
+    border: 5px solid #8b6508; 
+    box-shadow: 0 10px 30px #000; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+}
+
+.reels-container { 
+    display: flex; 
+    gap: 12px; 
+    background: #fff; 
+    padding: 15px; 
+    border-radius: 10px; 
+    border: inset 8px #444; 
+}
+
+/* RODILLOS AJUSTADOS PARA QUE NO SE CORTEN */
+.reel { 
+    width: 90px; 
+    height: 110px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    font-size: 4rem; /* Reducido de 5rem a 4rem para evitar recortes */
+    line-height: 1; /* Esto fuerza a que el emoji no genere márgenes invisibles extra */
+    padding-bottom: 5px; /* Ayuda a centrar verticalmente el emoji */
+    background: #f1f2f6; 
+    border: 2px solid #ccc; 
+    border-radius: 5px; 
+    box-shadow: inset 0 10px 15px rgba(0,0,0,0.2); 
+}
+
 .spinning { animation: spinReel 0.1s linear infinite; }
 
-@keyframes spinReel { 0% { transform: translateY(-10px); } 100% { transform: translateY(10px); filter: blur(2px); } }
+@keyframes spinReel { 
+    0% { transform: translateY(-8px); } 
+    100% { transform: translateY(8px); filter: blur(2px); } 
+}
+
 .betInfoDisplay { text-align: center; }
 .infoLabel { display: block; font-size: 0.7rem; color: #888; }
 .infoValue { font-size: 1.3rem; color: var(--primary); font-weight: bold; }
