@@ -1,29 +1,26 @@
-/* CORRECCIÓN PARA QUE NO SE CORTE EN PANTALLAS PEQUEÑAS */
-.gameArea { 
-    overflow-y: auto; 
-}
+.gameArea { overflow-y: auto; }
 
 .tableSurface { 
     flex: unset; 
-    min-height: calc(100vh - 140px); /* Altura dinámica para evitar el corte inferior */
+    min-height: calc(100vh - 140px); 
     display: flex; 
     flex-direction: column; 
     align-items: center; 
-    justify-content: flex-start; /* Empieza desde arriba, no forzar al centro */
+    justify-content: flex-start; 
     padding-top: 30px;
     padding-bottom: 30px;
     background: radial-gradient(#2c3e50, #000); 
 }
 
-/* TABLA DE PREMIOS MEJORADA */
+/* TABLA DE PREMIOS MÁS CURRADA */
 .paytable-container {
-    background: rgba(0, 0, 0, 0.7); 
+    background: rgba(0, 0, 0, 0.85); 
     border: 2px solid var(--primary);
     border-radius: 12px; 
     padding: 15px 25px; 
     margin-bottom: 30px;
     text-align: center; 
-    box-shadow: 0 8px 20px rgba(0,0,0,0.8);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.8), inset 0 0 15px rgba(255,215,0,0.1);
     display: inline-block;
 }
 .paytable-header { 
@@ -43,13 +40,23 @@
 .pay-item { 
     display: flex; 
     justify-content: space-between; 
-    font-size: 1rem; 
+    font-size: 1.05rem; 
     color: #eee; 
-    width: 200px; 
+    width: 220px; 
     border-bottom: 1px solid rgba(255,255,255,0.1); 
     padding-bottom: 5px;
+    align-items: center;
 }
-.pay-mult { color: var(--success); font-weight: bold; font-family: var(--font-ui); }
+.symbols { font-size: 1.2rem; }
+
+/* Colores dinámicos por premio */
+.pay-item.gold-prize .pay-mult { color: #ffd700; text-shadow: 0 0 5px rgba(255,215,0,0.5); }
+.pay-item.diamond-prize .pay-mult { color: #00ffff; text-shadow: 0 0 5px rgba(0,255,255,0.5); }
+.pay-item.cherry-prize .pay-mult { color: #ff4d4d; }
+.pay-item.basic-prize .pay-mult { color: #2ecc71; }
+
+.pay-mult { font-weight: bold; font-family: var(--font-ui); font-size: 1.1rem; }
+.pay-mult small { font-size: 0.65rem; vertical-align: middle; margin-left: 6px; opacity: 0.8; letter-spacing: 1px;}
 
 #gameMessage { font-size: 3rem; color: var(--primary); text-transform: uppercase; margin-bottom: 30px; text-shadow: 0 4px 6px #000; }
 .slot-machine { background: #b8860b; padding: 20px; border-radius: 15px; border: 5px solid #8b6508; box-shadow: 0 10px 30px #000; display: flex; justify-content: center; align-items: center;}

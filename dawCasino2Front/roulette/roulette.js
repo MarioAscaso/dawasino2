@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const payload = { userId: user.id, bets: betsArray.map(b => ({ betType: b.type, betValue: b.type === 'NUMBER' ? b.value.toString() : b.value, betAmount: b.amount })) };
             const result = await api.post('/roulette/spin', payload);
 
-            // CORRECCIÓN MATEMÁTICA EXACTA PARA ALINEAR LA FLECHA
+            // CORRECCIÓN MATEMÁTICA PARA LA FLECHA (Eliminada la suma fantasma)
             const index = wheelOrder.indexOf(result.winningNumber);
             const segment = 360 / 37;
             const targetAngle = 360 - (index * segment); 

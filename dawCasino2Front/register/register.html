@@ -6,36 +6,41 @@
     <title>Registro - DawCasino</title>
     <link rel="stylesheet" href="/common/common.css">
     <link rel="stylesheet" href="/register/register.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-    
-    <div class="authContainer">
-        <h1>CREAR CUENTA</h1>
-
-        <form id="registerForm">
-            <div class="inputGroup">
-                <label for="regUsername">USUARIO</label>
-                <input type="text" id="regUsername" placeholder="Elige un nombre de usuario" required>
-                
-                <label for="regEmail">EMAIL</label>
-                <input type="email" id="regEmail" placeholder="tu@email.com" required>
-
-                <label for="regPassword">CONTRASEÑA</label>
-                <input type="password" id="regPassword" placeholder="Mínimo 6 caracteres" required>
-
-                <label for="confirmPassword">REPETIR CONTRASEÑA</label>
-                <input type="password" id="confirmPassword" placeholder="Repite tu contraseña" required>
-
-                <button type="submit" class="btnPrimary">REGISTRARSE</button>
-            </div>
-        </form>
-
-        <div class="links">
-            <p>¿YA TIENES CUENTA? <a href="/login/login.html">INICIA SESIÓN</a></p>
-            <p><a href="/index/index.html">VOLVER AL LOBBY</a></p>
+    <div class="auth-container">
+        <div class="auth-box">
+            <a href="/index/index.html" class="logo-small">
+                <img src="/assets/icons/logo.png" alt="Casino Ascaso Logo">
+            </a>
+            <h2>CREAR CUENTA</h2>
+            <form id="registerForm">
+                <div class="input-group">
+                    <input type="text" id="regUsername" placeholder="Usuario" required>
+                </div>
+                <div class="input-group">
+                    <input type="email" id="regEmail" placeholder="Correo Electrónico" required>
+                </div>
+                <div class="input-group" style="position: relative;">
+                    <input type="password" id="regPassword" placeholder="Contraseña" required>
+                    <button type="button" class="btn-toggle-view" onclick="toggleView('regPassword', this)"
+                            style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: #888; font-size: 1.2rem;">
+                        👁️
+                    </button>
+                </div>
+                <div class="input-group" style="position: relative;">
+                    <input type="password" id="confirmPassword" placeholder="Confirmar Contraseña" required>
+                    <button type="button" class="btn-toggle-view" onclick="toggleView('confirmPassword', this)"
+                            style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: #888; font-size: 1.2rem;">
+                        👁️
+                    </button>
+                </div>
+                <button type="submit" class="btnAction btnGold btn-full">REGISTRARSE</button>
+            </form>
+            <p class="auth-switch">¿Ya tienes cuenta? <a href="/login/login.html">Inicia sesión</a></p>
         </div>
     </div>
-
     <script src="/common/common.js"></script>
     <script src="/register/register.js"></script>
 </body>

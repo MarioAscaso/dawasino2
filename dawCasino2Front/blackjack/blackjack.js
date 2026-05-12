@@ -1,9 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. AUTH CHECK
     const user = checkAuth();
     if (!user) return;
 
-    // --- DOM ---
     const currentBetDisplay = document.getElementById('currentBetDisplay');
     const betStack = document.getElementById('betStack');
     const dealerCardsEl = document.getElementById('dealerCards');
@@ -23,15 +21,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const bettingControls = document.getElementById('bettingControls');
     const actionControls = document.getElementById('actionControls');
 
-    // --- ESTADO ---
     let currentBet = 0;
     let lastBetAmount = 0;
 
-    // Init
     updateDOMBalance(user.balance);
-    loadHistory(); // Carga inicial del historial
+    loadHistory(); 
 
-    // --- INTERACCIÓN ---
     document.querySelectorAll('.chip').forEach(chip => {
         chip.addEventListener('click', () => {
             const val = parseInt(chip.dataset.value);
@@ -39,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const computedColor = getComputedStyle(chip).backgroundColor;
                 addChipToBet(val, computedColor);
             } else {
-                alert("Saldo insuficiente");
+                showAlert('Saldo insuficiente', 'No tienes saldo para añadir esta ficha.', 'warning');
             }
         });
     });
@@ -58,8 +53,9 @@ document.addEventListener('DOMContentLoaded', () => {
     btnClearBet.addEventListener('click', clearTableBet);
 
     btnRepeat.addEventListener('click', () => {
-        if (lastBetAmount === 0 || user.balance < lastBetAmount) return alert("Imposible repetir");
-        
+        if (lastBetAmount === 0 || user.balance < lastBetAmount) {
+            return showAlert('Aviso', 'No hay apuesta anterior o saldo insuficiente para repetir.', 'info');
+        }
         clearTableBet();
         addChipToBet(lastBetAmount, '#ffd700'); 
     });
@@ -70,9 +66,8 @@ document.addEventListener('DOMContentLoaded', () => {
         betStack.innerHTML = '';
     }
 
-    // --- ACCIONES ---
     btnDeal.addEventListener('click', () => {
-        if (currentBet === 0) return alert("Apuesta algo.");
+        if (currentBet === 0) return showAlert('Aviso', 'Debes realizar una apuesta antes de repartir.', 'warning');
         
         lastBetAmount = currentBet;
         user.balance -= currentBet;
@@ -100,7 +95,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 updateTableFast(gameState);
             }
 
-            // Si el juego ha terminado (Win/Lose/Draw), recargar historial
             if (gameState.status !== "PLAYING" && actionType !== 'stand') {
                 setTimeout(loadHistory, 1500);
             }
@@ -114,7 +108,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- ANIMACIONES ---
     async function animateDeal(state) {
         bettingControls.style.display = 'none';
         actionControls.style.display = 'flex';
@@ -161,7 +154,6 @@ document.addEventListener('DOMContentLoaded', () => {
         dealerScoreEl.textContent = state.dealerScore;
         endGame(state.status);
         
-        // Recargar historial al finalizar turno dealer
         setTimeout(loadHistory, 1000);
     }
 
@@ -171,7 +163,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const cardDiv = createCardElement(cardStr);
                 container.appendChild(cardDiv);
                 
-                // Animación simple si el zapato no está visible o calculado
                 if(dealerShoeEl) {
                     const shoeRect = dealerShoeEl.getBoundingClientRect();
                     requestAnimationFrame(() => {
@@ -231,10 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
         gameMessage.textContent = "HAZ TU APUESTA"; gameMessage.style.color = "#fff";
     }
 
-    // --- HISTORIAL ---
     async function loadHistory() {
-        // Usa la función helper de common.js: renderSharedHistory
-        // Asegúrate de que common.js está cargado antes en el HTML
         try {
             const history = await api.get(`/blackjack/history/${user.id}`);
             renderSharedHistory(history.slice(0, 15), 'miniHistoryList');

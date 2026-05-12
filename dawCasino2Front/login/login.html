@@ -6,30 +6,31 @@
     <title>Login - DawCasino</title>
     <link rel="stylesheet" href="/common/common.css">
     <link rel="stylesheet" href="/login/login.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-    
-    <div class="authContainer">
-        <h1>INICIAR SESIÓN</h1>
-
-        <form id="loginForm">
-            <div class="inputGroup">
-                <label for="username">USUARIO</label>
-                <input type="text" id="username" placeholder="Tu nombre de usuario" required>
-                
-                <label for="password">CONTRASEÑA</label>
-                <input type="password" id="password" placeholder="Tu contraseña" required>
-
-                <button type="submit" class="btnPrimary">ENTRAR AL CASINO</button>
-            </div>
-        </form>
-
-        <div class="links">
-            <p>¿NO TIENES CUENTA? <a href="/register/register.html">REGÍSTRATE AQUÍ</a></p>
-            <p><a href="/index/index.html">VOLVER AL LOBBY</a></p>
+    <div class="auth-container">
+        <div class="auth-box">
+            <a href="/index/index.html" class="logo-small">
+                <img src="/assets/icons/logo.png" alt="Casino Ascaso Logo">
+            </a>
+            <h2>INICIAR SESIÓN</h2>
+            <form id="loginForm">
+                <div class="input-group">
+                    <input type="text" id="username" placeholder="Usuario" required>
+                </div>
+                <div class="input-group" style="position: relative;">
+                    <input type="password" id="password" placeholder="Contraseña" required>
+                    <button type="button" id="togglePassword" class="btn-toggle-view" 
+                            style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: #888; font-size: 1.2rem;">
+                        👁️
+                    </button>
+                </div>
+                <button type="submit" class="btnAction btnGold btn-full">ENTRAR</button>
+            </form>
+            <p class="auth-switch">¿No tienes cuenta? <a href="/register/register.html">Regístrate aquí</a></p>
         </div>
     </div>
-
     <script src="/common/common.js"></script>
     <script src="/login/login.js"></script>
 </body>

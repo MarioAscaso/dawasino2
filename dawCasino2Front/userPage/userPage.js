@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const logoutBtn = document.querySelector('.logout-btn');
     if (logoutBtn) logoutBtn.addEventListener('click', (e) => { e.preventDefault(); logout(); });
 
-    // Corrección del emoji descolocado (reemplazado por emojis seguros)
-    const avatarsList = ['👤', '👨', '👩', '🚀', '🧛', '🧙', '🥷', '🕵️', '🤖', '👽', '🐶', '🦊', '🦁', '🐸', '🐼', '🤑', '🃏', '👑'];
+    // Corrección del emoji descolocado (Sustituido el cohete por 😎)
+    const avatarsList = ['👤', '👨', '👩', '😎', '🧛', '🧙', '🥷', '🕵️', '🤖', '👽', '🐶', '🦊', '🦁', '🐸', '🐼', '🤑', '🃏', '👑'];
     const flagsList = [
         { code: 'es', name: 'España' }, { code: 'ar', name: 'Argentina' },
         { code: 'mx', name: 'México' }, { code: 'co', name: 'Colombia' },

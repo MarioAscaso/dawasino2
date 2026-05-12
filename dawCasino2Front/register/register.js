@@ -1,3 +1,11 @@
+// Función global para alternar la vista de los campos de contraseña múltiples
+function toggleView(inputId, btn) {
+    const input = document.getElementById(inputId);
+    const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+    input.setAttribute('type', type);
+    btn.textContent = type === 'password' ? '👁️' : '🔒';
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const registerForm = document.getElementById('registerForm');
 
