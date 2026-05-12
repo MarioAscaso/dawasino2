@@ -3,6 +3,7 @@ package com.example.dawCasino2Back.games.roulette.infrastructure.controllers;
 import com.example.dawCasino2Back.games.roulette.application.RouletteService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -20,11 +21,9 @@ public class RouletteController {
     public ResponseEntity<?> spin(@RequestBody Map<String, Object> payload) {
         try {
             Long userId = Long.valueOf(payload.get("userId").toString());
-            String betType = payload.get("betType").toString(); // NUMBER, COLOR, PARITY
-            String betValue = payload.get("betValue").toString(); // "14", "RED", "EVEN"
-            Double amount = Double.valueOf(payload.get("betAmount").toString());
+            List<Map<String, Object>> bets = (List<Map<String, Object>>) payload.get("bets");
 
-            return ResponseEntity.ok(rouletteService.spinWheel(userId, betType, betValue, amount));
+            return ResponseEntity.ok(rouletteService.spinWheel(userId, bets));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

@@ -1,10 +1,8 @@
 const API_BASE_URL = 'http://localhost:8989/api';
 
-// --- AUTH ---
 function checkAuth() {
     const userJson = localStorage.getItem('user');
     if (!userJson) {
-        // Redirigir si no estamos ya en login/register/index
         const path = window.location.pathname;
         if (!path.includes('login') && !path.includes('register') && !path.includes('index') && path !== '/') {
             window.location.href = '/login/login.html';
@@ -27,7 +25,6 @@ function updateLocalUser(newBalance) {
     }
 }
 
-// --- API HELPER (Simplifica los fetch) ---
 const api = {
     post: async (endpoint, data) => {
         try {
@@ -52,41 +49,71 @@ const api = {
     }
 };
 
-// --- UI HELPERS COMPARTIDOS ---
 function updateDOMBalance(amount) {
     const el = document.getElementById('currentBalance');
     if (el) el.textContent = parseFloat(amount).toFixed(2) + ' €';
 }
 
-// Pinta el historial en la barra lateral (sirve para BJ y Ruleta)
 function renderSharedHistory(games, listId = 'miniHistoryList') {
     const list = document.getElementById(listId);
     if (!list) return;
-    
-    list.innerHTML = ''; // Limpiar
-    
+    list.innerHTML = ''; 
     games.forEach(game => {
-        // Unificar nombres de campos que a veces varían en el backend
         const win = game.winAmount || 0;
         const bet = game.betAmount || 0;
         const profit = win - bet;
         
-        // Determinar qué mostrar como "Resultado" (Número en Ruleta, W/L en BJ)
         let displayResult = 'L';
-        if (game.winningNumber !== undefined) displayResult = game.winningNumber; // Ruleta
+        if (game.winningNumber !== undefined) displayResult = game.winningNumber;
         else if (game.result) displayResult = game.result === 'WIN' ? 'W' : (game.result === 'LOSE' ? 'L' : 'D');
 
-        // Clase CSS
         let cssClass = 'res-lose';
         if (profit > 0) cssClass = 'res-win';
         else if (profit === 0 && win > 0) cssClass = 'res-draw';
 
         const li = document.createElement('li');
         li.className = `history-item ${cssClass}`;
-        li.innerHTML = `
-            <span>${displayResult}</span>
-            <span class="history-val">${profit > 0 ? '+' : ''}${parseFloat(profit).toFixed(0)}€</span>
-        `;
+        li.innerHTML = `<span>${displayResult}</span><span class="history-val">${profit > 0 ? '+' : ''}${parseFloat(profit).toFixed(0)}€</span>`;
         list.appendChild(li);
     });
+}
+
+/* NUEVO: Función global para Alertas con SweetAlert2 */
+function showAlert(title, text, icon) {
+    if (typeof Swal !== 'undefined') {
+        Swal.fire({
+            title: title,
+            text: text,
+            icon: icon, // 'success', 'error', 'warning', 'info'
+            background: '#252525',
+            color: '#fff',
+            confirmButtonColor: '#ffd700',
+            confirmButtonText: '<span style="color:#000; font-weight:bold;">ACEPTAR</span>',
+            customClass: { popup: 'swal-custom-popup' }
+        });
+    } else {
+        alert(title + (text ? "\n" + text : ""));
+    }
+}
+
+/* NUEVO: Renderizador de Avatares global para reusar en Lobby y Panel */
+function renderUserAvatar(element, avatarData) {
+    if (!element) return;
+    element.style.display = 'flex';
+    element.style.justifyContent = 'center';
+    element.style.alignItems = 'center';
+    element.style.overflow = 'hidden';
+
+    if (!avatarData || avatarData === 'default_avatar.png') {
+        element.style.fontSize = '1.5rem';
+        element.innerHTML = '👤';
+        return;
+    }
+
+    if (avatarData.startsWith('http')) {
+        element.innerHTML = `<img src="${avatarData}" style="width:100%; height:100%; object-fit:cover;">`;
+    } else {
+        element.style.fontSize = '1.5rem';
+        element.innerHTML = avatarData;
+    }
 }

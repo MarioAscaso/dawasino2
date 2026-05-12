@@ -300,3 +300,7 @@ body {
     transform: scale(1.2) rotate(-5deg); 
     filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.7));
 }
+
+/* Estilos extra para SweetAlert2 */
+.swal-custom-popup { border: 2px solid var(--primary); border-radius: 12px; }
+.swal2-title { font-family: var(--font-ui) !important; letter-spacing: 1px; }

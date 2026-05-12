@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Slots - DawCasino</title>
+    <link rel="stylesheet" href="/common/common.css">
+    <link rel="stylesheet" href="/slots/slots.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div class="mainContainer">
+        <aside class="sidebarHistory">
+            <h3>ÚLTIMOS GIROS</h3>
+            <ul id="miniHistoryList"></ul>
+        </aside>
+        
+        <main class="gameArea">
+            <div class="topBar">
+                <a href="/index/index.html" class="btnBack">⬅ LOBBY</a>
+                <div class="walletDisplay">SALDO: <span class="balanceAmount" id="currentBalance">...</span></div>
+            </div>
+            
+            <div class="tableSurface">
+                
+                <div class="paytable-container">
+                    <div class="paytable-header">💎 TABLA DE PREMIOS 💎</div>
+                    <div class="paytable-grid">
+                        <div class="pay-item"><span class="symbols">7️⃣ 7️⃣ 7️⃣</span> <span class="pay-mult">x50</span></div>
+                        <div class="pay-item"><span class="symbols">💎 💎 💎</span> <span class="pay-mult">x25</span></div>
+                        <div class="pay-item"><span class="symbols">🍒 🍒 🍒 (o 3 =)</span> <span class="pay-mult">x10</span></div>
+                        <div class="pay-item"><span class="symbols">2 Iguales</span> <span class="pay-mult">x2</span></div>
+                    </div>
+                </div>
+
+                <h1 id="gameMessage">GIRA LOS RODILLOS</h1>
+                
+                <div class="slot-machine">
+                    <div class="reels-container">
+                        <div class="reel" id="reel1">🍒</div>
+                        <div class="reel" id="reel2">🍋</div>
+                        <div class="reel" id="reel3">7️⃣</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="controlsArea">
+                <div class="bettingControls">
+                    <div class="chipsRack">
+                        <div class="chip chip-1" data-value="1">1</div>
+                        <div class="chip chip-5" data-value="5">5</div>
+                        <div class="chip chip-25" data-value="25">25</div>
+                        <div class="chip chip-100" data-value="100">100</div>
+                    </div>
+                    <div class="betInfoDisplay">
+                        <span class="infoLabel">APUESTA TOTAL</span>
+                        <span class="infoValue" id="betAmountDisplay">5.00 €</span>
+                    </div>
+                    <div class="betActions">
+                        <button id="btnSpin" class="btnAction btnGold">JUGAR TIRADA</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="/common/common.js"></script>
+    <script src="/slots/slots.js"></script>
+</body>
+</html>

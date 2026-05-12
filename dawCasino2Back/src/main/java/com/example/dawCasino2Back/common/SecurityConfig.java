@@ -31,12 +31,11 @@ public class SecurityConfig {
                 }))
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        // CAMBIO AQUÍ: Permitir login y register explícitamente en la ruta /api/
                         .requestMatchers("/api/login", "/api/register").permitAll()
-                        // Mantener el resto por si acaso
                         .requestMatchers("/api/users/**").permitAll()
                         .requestMatchers("/api/blackjack/**").permitAll()
                         .requestMatchers("/api/roulette/**").permitAll()
+                        .requestMatchers("/api/slots/**").permitAll()
                         .anyRequest().authenticated()
                 );
 

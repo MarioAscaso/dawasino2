@@ -8,34 +8,29 @@ document.addEventListener('DOMContentLoaded', () => {
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
-            const credentials = {
-                username: username,
-                password: password
-            };
-
             try {
                 const response = await fetch(`${API_BASE_URL}/login`, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(credentials)
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
                 });
 
                 if (response.ok) {
                     const user = await response.json();
-                    
                     localStorage.setItem('user', JSON.stringify(user));
-
-                    alert("¡Login correcto! Bienvenido " + user.username);
-                    window.location.href = '/userPage/userPage.html'; 
+                    
+                    if(typeof Swal !== 'undefined') {
+                        Swal.fire({ title: '¡Login correcto!', text: 'Bienvenido ' + user.username, icon: 'success', background: '#252525', color: '#fff', showConfirmButton: false, timer: 1500 });
+                        setTimeout(() => { window.location.href = '/userPage/userPage.html'; }, 1500);
+                    } else {
+                        window.location.href = '/userPage/userPage.html';
+                    }
                 } else {
                     const errorText = await response.text();
-                    alert("Error: " + errorText);
+                    showAlert('Error al entrar', errorText, 'error');
                 }
             } catch (error) {
-                console.error('Error:', error);
-                alert("Error de conexión con el servidor");
+                showAlert('Fallo de conexión', 'No se pudo conectar con el servidor', 'error');
             }
         });
     }
