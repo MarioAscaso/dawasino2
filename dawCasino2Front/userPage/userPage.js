@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (logoutBtn) logoutBtn.addEventListener('click', (e) => { e.preventDefault(); logout(); });
 
     // Corrección del emoji descolocado (Sustituido el cohete por 😎)
-    const avatarsList = ['👤', '👨', '👩', '😎', '🧛', '🧙', '🥷', '🕵️', '🤖', '👽', '🐶', '🦊', '🦁', '🐸', '🐼', '🤑', '🃏', '👑'];
+    const avatarsList = ['👤', '👨', '👩', '😎', '🧛', '🧙', '🕵️', '🤖', '🧿', '👽', '🐶', '🦊', '🦁', '🐸', '🐼', '🤑', '🃏', '👑', '🗿', '👹', '🧃'];
     const flagsList = [
         { code: 'es', name: 'España' }, { code: 'ar', name: 'Argentina' },
         { code: 'mx', name: 'México' }, { code: 'co', name: 'Colombia' },
@@ -24,7 +24,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         { code: 'us', name: 'USA' }, { code: 'gb', name: 'Reino Unido' },
         { code: 'fr', name: 'Francia' }, { code: 'de', name: 'Alemania' },
         { code: 'it', name: 'Italia' }, { code: 'jp', name: 'Japón' },
-        { code: 'br', name: 'Brasil' }, { code: 'pt', name: 'Portugal' }
+        { code: 'br', name: 'Brasil' }, { code: 'pt', name: 'Portugal' },
+        { code: 'zw', name: 'Zimbabwe'},{ code: 'rs', name: 'Serbia'},
+        { code: 'il', name: 'Israel'}
     ];
 
     const settingsBtn = document.querySelector('.settings-btn');
